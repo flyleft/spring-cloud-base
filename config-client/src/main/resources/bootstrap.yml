@@ -9,7 +9,7 @@ spring:
     name: config-client
   cloud:
     config:
-      uri: http://127.0.0.1:8769/site/master
+      uri: http://127.0.0.1:8769/
       label: master
       profile: test
-      name: config-client
+      name: config_client

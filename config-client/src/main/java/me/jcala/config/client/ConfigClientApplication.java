@@ -31,6 +31,6 @@ public class ConfigClientApplication {
 
   @GetMapping("/info_by_env")
   public String getInfoByEnv(){
-    return env.getProperty ("info","undefined");
+    return env.getProperty ("site.info","undefined");
   }
 }
