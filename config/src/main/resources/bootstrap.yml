@@ -8,7 +8,7 @@ spring:
       server:
         git:
           uri: https://github.com/jcalaz/spring-cloud-config-base-server.git
-          searchPaths: '{profile}'
+          searchPaths: config-profile
           default-label: master
         bootstrap: true
 eureka:
