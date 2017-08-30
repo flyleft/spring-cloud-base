@@ -1,0 +1,9 @@
+zuul:
+  addHostHeader: true
+  routes:
+    client_a:
+      path: /client_a/**
+      serviceId: client-server-a
+    consumer:
+      path: /consumer/**
+      serviceId: consumer-ribbon
