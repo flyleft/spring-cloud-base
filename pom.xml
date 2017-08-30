@@ -14,6 +14,7 @@
         <module>client-a</module>
         <module>consumer-by-ribbon</module>
         <module>consumer-by-ribbon-and-hystrix</module>
+        <module>config</module>
     </modules>
 
     <parent>
