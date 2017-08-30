@@ -10,6 +10,10 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>register</module>
+        <module>zuul</module>
+        <module>client-a</module>
+        <module>consumer-by-ribbon</module>
+        <module>consumer-by-ribbon-and-hystrix</module>
     </modules>
 
     <parent>
@@ -43,6 +47,17 @@
             <url>http://nexus.saas.hand-china.com/content/repositories/rdc/</url>
         </repository>
     </repositories>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Dalston.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <build>
         <plugins>
             <plugin>
