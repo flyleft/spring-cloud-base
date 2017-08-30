@@ -1,5 +1,5 @@
 server:
-  port: 8010
+  port: 8769
 spring:
   application:
     name: hap-config-server
@@ -7,8 +7,8 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/jcalaz/spring-cloud-config-base-server.git
-          searchPaths: config-profile
+          uri: https://github.com/jcalaz/spring-cloud-base.git
+          searchPaths: config-profiles
           default-label: master
         bootstrap: true
 eureka:
