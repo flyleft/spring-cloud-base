@@ -10,6 +10,8 @@ import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
+
 /**
  * Created by zhipeng.zuo on 2017/8/30.
  */
@@ -19,8 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 @EnableEurekaClient
 public class ConfigClientApplication {
 
-  @Value("${site.info}")
-  private String info;
 
   @Autowired
   private Environment env;
@@ -29,13 +29,8 @@ public class ConfigClientApplication {
     new SpringApplicationBuilder (ConfigClientApplication.class).web(true).run(args);
   }
 
-  @GetMapping("/info_by_value")
-  public String getInfoByValue(){
-    return this.info;
-  }
-
   @GetMapping("/info_by_env")
   public String getInfoByEnv(){
-    return env.getProperty("site.info","undefined");
+    return env.getProperty ("info","undefined");
   }
 }
