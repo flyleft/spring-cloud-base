@@ -1,8 +1,7 @@
 zuul:
   addHostHeader: true
   routes:
-    client_a:
-      path: /ws/**
+    hello:
       serviceId: ws-server
   ws:
     brokerages:

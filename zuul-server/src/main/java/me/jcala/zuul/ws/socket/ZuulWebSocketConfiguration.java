@@ -45,7 +45,6 @@ public class ZuulWebSocketConfiguration implements ApplicationListener<ContextRe
 
   @Override
   public void onApplicationEvent(ContextRefreshedEvent event) {
-    logger.info ("======================init websocket server===============");
     ignorePattern("**/websocket");
     ignorePattern("**/info");
   }

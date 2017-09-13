@@ -26,6 +26,7 @@ public class NextHop{
 
     public NextHop(WebSocketSession serverSession,
                    ZuulWebSocketProperties zuulWebSocketProperties) {
+        logger.info ("==================init NextHop");
         this.clientSession = createWebSocketClientSession(serverSession);
         this.zuulWebSocketProperties = zuulWebSocketProperties;
     }

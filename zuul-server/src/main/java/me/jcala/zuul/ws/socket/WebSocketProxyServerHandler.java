@@ -25,7 +25,7 @@ public class WebSocketProxyServerHandler extends AbstractWebSocketHandler {
     private ZuulWebSocketProperties webSocketProperties;
 
     public WebSocketProxyServerHandler() {
-        logger.info ("new WebSocketProxyServerHandler ...");
+        logger.info ("=============init WebSocketProxyServerHandler");
     }
 
     @Override
@@ -44,19 +44,18 @@ public class WebSocketProxyServerHandler extends AbstractWebSocketHandler {
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        super.afterConnectionEstablished (session);
+        logger.info ("============afterConnectionEstablished");
     }
 
 
     @Override
     public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
-        super.handleTransportError (session, exception);
+        logger.info ("============handleTransportError");
     }
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-        session.close ();
-        nextHops.remove (session.getId ());
+        logger.info ("============afterConnectionClosed");
     }
 
     @Override
