@@ -1,9 +1,12 @@
 package me.jcala.zuul.ws.socket;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,6 +15,7 @@ import java.util.Map;
  */
 @ConfigurationProperties("zuul.ws")
 public class ZuulWebSocketProperties {
+  private static final Logger logger= LoggerFactory.getLogger (ZuulWebSocketProperties.class);
   private boolean enabled = true;
   private Map<String, WsBrokerage> brokerages = new HashMap<> ();
 
@@ -27,6 +31,7 @@ public class ZuulWebSocketProperties {
   public void init() {
     for (Map.Entry<String,WsBrokerage> entry : this.brokerages.entrySet()) {
       WsBrokerage wsBrokerage = entry.getValue();
+      logger.info ("================ wsBrokerage: "+wsBrokerage);
       if (!StringUtils.hasText(wsBrokerage.getId())) {
         wsBrokerage.id = entry.getKey();
       }
@@ -60,5 +65,15 @@ public class ZuulWebSocketProperties {
     public void setEndPoints(String[] endPoints) {
       this.endPoints = endPoints;
     }
+
+    @Override
+    public String toString() {
+      return "WsBrokerage{" +
+              "enabled=" + enabled +
+              ", id='" + id + '\'' +
+              ", endPoints=" + Arrays.toString (endPoints) +
+              '}';
+    }
   }
+
 }

@@ -16,11 +16,6 @@ import java.net.URI;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-/**
- * Represents a 'hop' in the proxying chain, establishes a 'client' to
- * communicate with the next server, with a {@link WebSocketProxyClientHandler}
- * to copy data from the 'client' to the supplied 'server' session.
- */
 public class NextHop{
     private static final Logger logger= LoggerFactory.getLogger (NextHop.class);
     private final WebSocketSession clientSession;
@@ -50,7 +45,7 @@ public class NextHop{
 
         String uri = ServletUriComponentsBuilder.fromHttpUrl(routeHost).path(path)
                 .toUriString();
-
+        logger.info ("===========准备进行握手================");
         try {
             return new StandardWebSocketClient ()
                     .doHandshake(new WebSocketProxyClientHandler (serverSession),

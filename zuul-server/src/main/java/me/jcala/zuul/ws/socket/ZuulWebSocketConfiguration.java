@@ -17,10 +17,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.web.socket.WebSocketHandler;
-import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
-import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
-
-import java.util.Map;
 
 /**
  * Created by zhipeng.zuo on 2017/9/12.
@@ -30,7 +26,7 @@ import java.util.Map;
 @ConditionalOnProperty(prefix = "zuul.ws", name = "enabled", havingValue = "true", matchIfMissing = true)
 @ConditionalOnClass(WebSocketHandler.class)//当类路径下有指定的类的条件下
 @EnableConfigurationProperties(ZuulWebSocketProperties.class)
-public class ZuulWebSocketConfiguration implements WebSocketConfigurer,ApplicationListener<ContextRefreshedEvent> {
+public class ZuulWebSocketConfiguration implements ApplicationListener<ContextRefreshedEvent> {
   private static final Logger logger= LoggerFactory.getLogger (ZuulWebSocketConfiguration.class);
   private final ZuulWebSocketProperties zuulWebSocketProperties;
   private final ZuulProperties zuulProperties;
@@ -49,6 +45,7 @@ public class ZuulWebSocketConfiguration implements WebSocketConfigurer,Applicati
 
   @Override
   public void onApplicationEvent(ContextRefreshedEvent event) {
+    logger.info ("======================init websocket server===============");
     ignorePattern("**/websocket");
     ignorePattern("**/info");
   }
@@ -60,18 +57,9 @@ public class ZuulWebSocketConfiguration implements WebSocketConfigurer,Applicati
     zuulProperties.getIgnoredPatterns().add(ignoredPattern);
   }
 
-
-  @Override
-  public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-    for (Map.Entry<String, ZuulWebSocketProperties.WsBrokerage> entry :
-            zuulWebSocketProperties.getBrokerages().entrySet()) {
-      logger.info ("registerWebSocketHandlers K: "+entry.getKey ()+" v: "+entry.getValue ());
-      ZuulWebSocketProperties.WsBrokerage wsBrokerage = entry.getValue();
-      if (wsBrokerage.isEnabled()) {
-         registry.addHandler (new WebSocketProxyServerHandler (),wsBrokerage.getEndPoints ())
-                 .setAllowedOrigins ("*");
-      }
-    }
+  @Bean
+  public RegisterWebSocketHandler registerWebSocketHandler(ZuulWebSocketProperties zuulWebSocketProperties){
+    return new RegisterWebSocketHandler (zuulWebSocketProperties);
   }
 
   @Bean
