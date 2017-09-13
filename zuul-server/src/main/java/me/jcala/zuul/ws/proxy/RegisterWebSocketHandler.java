@@ -30,9 +30,7 @@ public class RegisterWebSocketHandler implements WebSocketConfigurer {
     for (Map.Entry<String, ZuulWebSocketProperties.WsBrokerage> entry :
             zuulWebSocketProperties.getBrokerages().entrySet()) {
       ZuulWebSocketProperties.WsBrokerage wsBrokerage = entry.getValue();
-      logger.info ("======registerWebSocketHandlers: v {}",entry.getValue ());
       if (wsBrokerage.isEnabled()) {
-        logger.info ("======registerWebSocketHandlers: new WebSocketProxyServerHandler");
         registry.addHandler (new WebSocketProxyServerHandler (zuulWebSocketProperties,
                 zuulPropertiesResolver),wsBrokerage.getEndPoints ())
                 .setAllowedOrigins ("*");

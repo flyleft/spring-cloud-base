@@ -16,13 +16,13 @@ public class WebSocketProxyClientHandler extends AbstractWebSocketHandler {
 
     public WebSocketProxyClientHandler(WebSocketSession serverSession) {
         this.serverSession = serverSession;
-        logger.info ("new WebSocketProxyClientHandler ...");
     }
 
     @Override
     public void handleMessage(WebSocketSession session, WebSocketMessage<?> webSocketMessage) throws Exception {
+        logger.info ("session: "+session);
+        logger.info ("serverSession: "+serverSession);
         serverSession.sendMessage(webSocketMessage);
-        logger.info ("serverSession.sendMessage {}",webSocketMessage);
     }
 
     @Override

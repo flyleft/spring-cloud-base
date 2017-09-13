@@ -35,18 +35,14 @@ public class NextHop{
 
     private WebSocketSession createWebSocketClientSession(WebSocketSession serverSession) {
         URI sessionUri = serverSession.getUri();
-        logger.info ("serverSession uri: {}",sessionUri);
         ZuulWebSocketProperties.WsBrokerage wsBrokerage = getWebSocketBrokarage(
                 sessionUri);
-        logger.info ("WsBrokerage:");
         Assert.notNull(wsBrokerage, "wsBrokerage");
 
         String path = getWebSocketServerPath(wsBrokerage, sessionUri);
-        logger.info ("path: {}",path);
         Assert.notNull(path, "Web socket uri path");
 
         String routeHost = zuulPropertiesResolver.getRouteHost(wsBrokerage);
-        logger.info ("routeHost: {}",routeHost);
         Assert.notNull(routeHost, "routeHost");
 
         String uri = ServletUriComponentsBuilder.fromHttpUrl(routeHost).path(path)
@@ -62,7 +58,6 @@ public class NextHop{
     }
 
     public void sendMessageToNextHop(WebSocketMessage<?> webSocketMessage) throws IOException {
-        logger.info ("clientSession.sendMessage {}",webSocketMessage);
         clientSession.sendMessage(webSocketMessage);
     }
 

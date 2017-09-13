@@ -21,6 +21,7 @@ public class CmdHandler extends TextWebSocketHandler {
     logger.info("message received: {}", message.getPayload());
     try {
       session.sendMessage(msg);
+      logger.info("message  session.sendMessage: {}",msg);
     } catch (IOException e){
      logger.error(e.getMessage(), e);
   }
