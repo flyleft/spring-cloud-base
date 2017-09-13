@@ -17,6 +17,8 @@
         <module>config</module>
         <module>config-client</module>
         <module>bus-by-rabbitmq</module>
+        <module>ws-server</module>
+        <module>zuul-server</module>
     </modules>
 
     <parent>

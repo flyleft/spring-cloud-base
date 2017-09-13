@@ -1,0 +1,10 @@
+zuul:
+  addHostHeader: true
+  routes:
+    client_a:
+      path: /ws/**
+      serviceId: ws-server
+  ws:
+    brokerages:
+      hello:
+        end-points: /test
