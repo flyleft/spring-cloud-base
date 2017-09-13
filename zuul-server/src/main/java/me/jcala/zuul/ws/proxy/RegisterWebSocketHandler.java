@@ -1,5 +1,7 @@
-package me.jcala.zuul.ws.socket;
+package me.jcala.zuul.ws.proxy;
 
+import me.jcala.zuul.ws.ZuulWebSocketProperties;
+import me.jcala.zuul.ws.resolver.ZuulPropertiesResolver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;

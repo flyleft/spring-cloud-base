@@ -1,6 +1,5 @@
 package me.jcala.zuul.ws;
 
-import me.jcala.zuul.ws.socket.EnableZuulWebsocket;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;

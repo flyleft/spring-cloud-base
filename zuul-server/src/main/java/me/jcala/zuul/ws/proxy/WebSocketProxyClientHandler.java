@@ -1,4 +1,4 @@
-package me.jcala.zuul.ws.socket;
+package me.jcala.zuul.ws.proxy;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-package me.jcala.zuul.ws.socket;
+package me.jcala.zuul.ws.resolver;
+
+import me.jcala.zuul.ws.ZuulWebSocketProperties;
 
 /**
  * Strategy to resolve zuul properties

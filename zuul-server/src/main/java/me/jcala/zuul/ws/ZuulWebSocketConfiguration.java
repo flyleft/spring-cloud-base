@@ -1,11 +1,13 @@
-package me.jcala.zuul.ws.socket;
+package me.jcala.zuul.ws;
 
 import me.jcala.zuul.ws.filter.ProxyRedirectFilter;
+import me.jcala.zuul.ws.resolver.EurekaPropertiesResolver;
+import me.jcala.zuul.ws.resolver.ZuulPropertiesResolver;
+import me.jcala.zuul.ws.proxy.RegisterWebSocketHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

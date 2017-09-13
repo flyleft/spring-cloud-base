@@ -1,4 +1,4 @@
-package me.jcala.zuul.ws.socket;
+package me.jcala.zuul.ws;
 
 import org.springframework.context.annotation.Import;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;

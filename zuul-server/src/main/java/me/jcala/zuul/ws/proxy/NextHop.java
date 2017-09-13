@@ -1,8 +1,9 @@
-package me.jcala.zuul.ws.socket;
+package me.jcala.zuul.ws.proxy;
 
+import me.jcala.zuul.ws.ZuulWebSocketProperties;
+import me.jcala.zuul.ws.resolver.ZuulPropertiesResolver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 import org.springframework.util.PatternMatchUtils;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -49,8 +50,7 @@ public class NextHop{
         Assert.notNull(routeHost, "routeHost");
 
         String uri = ServletUriComponentsBuilder.fromHttpUrl(routeHost).path(path)
-                .toUriString();
-        logger.info ("===========准备进行握手================");
+                .toUriString().replaceFirst ("http","ws");
         try {
             return new StandardWebSocketClient ()
                     .doHandshake(new WebSocketProxyClientHandler (serverSession),
