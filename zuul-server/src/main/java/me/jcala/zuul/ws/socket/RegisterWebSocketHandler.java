@@ -14,10 +14,13 @@ public class RegisterWebSocketHandler implements WebSocketConfigurer {
   private static final Logger logger= LoggerFactory.getLogger (RegisterWebSocketHandler.class);
 
   private final ZuulWebSocketProperties zuulWebSocketProperties;
+  private final ZuulPropertiesResolver zuulPropertiesResolver;
 
 
-  public RegisterWebSocketHandler(ZuulWebSocketProperties zuulWebSocketProperties) {
+  public RegisterWebSocketHandler(ZuulWebSocketProperties zuulWebSocketProperties,
+                                  ZuulPropertiesResolver zuulPropertiesResolver) {
     this.zuulWebSocketProperties = zuulWebSocketProperties;
+    this.zuulPropertiesResolver = zuulPropertiesResolver;
   }
 
   @Override
@@ -28,7 +31,8 @@ public class RegisterWebSocketHandler implements WebSocketConfigurer {
       logger.info ("======registerWebSocketHandlers: v {}",entry.getValue ());
       if (wsBrokerage.isEnabled()) {
         logger.info ("======registerWebSocketHandlers: new WebSocketProxyServerHandler");
-        registry.addHandler (new WebSocketProxyServerHandler (),wsBrokerage.getEndPoints ())
+        registry.addHandler (new WebSocketProxyServerHandler (zuulWebSocketProperties,
+                zuulPropertiesResolver),wsBrokerage.getEndPoints ())
                 .setAllowedOrigins ("*");
       }
     }

@@ -16,16 +16,16 @@ import java.util.concurrent.ConcurrentHashMap;
  * Handles establishment and tracking of next 'hop', and
  * copies data from the current session to the next hop.
  */
-@Component
 public class WebSocketProxyServerHandler extends AbstractWebSocketHandler {
     private static final Logger logger= LoggerFactory.getLogger (WebSocketProxyServerHandler.class);
     private final Map<String, NextHop> nextHops = new ConcurrentHashMap<>();
+    private ZuulWebSocketProperties zuulWebSocketProperties;
+    private ZuulPropertiesResolver zuulPropertiesResolver;
 
-    @Autowired
-    private ZuulWebSocketProperties webSocketProperties;
-
-    public WebSocketProxyServerHandler() {
-        logger.info ("=============init WebSocketProxyServerHandler");
+    public WebSocketProxyServerHandler(ZuulWebSocketProperties zuulWebSocketProperties,
+                                       ZuulPropertiesResolver zuulPropertiesResolver) {
+        this.zuulWebSocketProperties = zuulWebSocketProperties;
+        this.zuulPropertiesResolver = zuulPropertiesResolver;
     }
 
     @Override
@@ -36,7 +36,7 @@ public class WebSocketProxyServerHandler extends AbstractWebSocketHandler {
     private NextHop getNextHop(WebSocketSession serverSession) {
         NextHop nextHop = nextHops.get(serverSession.getId());
         if (nextHop == null) {
-            nextHop = new NextHop(serverSession,webSocketProperties);
+            nextHop = new NextHop(zuulWebSocketProperties,zuulPropertiesResolver,serverSession);
             nextHops.put(serverSession.getId(), nextHop);
         }
         return nextHop;

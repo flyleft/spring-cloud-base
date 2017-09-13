@@ -27,6 +27,5 @@ public class WebSocketProxyClientHandler extends AbstractWebSocketHandler {
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-        session.close ();
     }
 }

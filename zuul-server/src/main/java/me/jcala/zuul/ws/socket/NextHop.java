@@ -18,30 +18,34 @@ import java.util.concurrent.TimeUnit;
 
 public class NextHop{
     private static final Logger logger= LoggerFactory.getLogger (NextHop.class);
-    private final WebSocketSession clientSession;
-    private final ZuulWebSocketProperties zuulWebSocketProperties;
+    private  WebSocketSession clientSession;
 
-    @Autowired
+    private ZuulWebSocketProperties zuulWebSocketProperties;
+
     private ZuulPropertiesResolver zuulPropertiesResolver;
 
-    public NextHop(WebSocketSession serverSession,
-                   ZuulWebSocketProperties zuulWebSocketProperties) {
-        logger.info ("==================init NextHop");
-        this.clientSession = createWebSocketClientSession(serverSession);
+    public NextHop(ZuulWebSocketProperties zuulWebSocketProperties,
+                   ZuulPropertiesResolver zuulPropertiesResolver,
+                   WebSocketSession serverSession) {
         this.zuulWebSocketProperties = zuulWebSocketProperties;
+        this.zuulPropertiesResolver = zuulPropertiesResolver;
+        this.clientSession = createWebSocketClientSession(serverSession);
     }
 
     private WebSocketSession createWebSocketClientSession(WebSocketSession serverSession) {
         URI sessionUri = serverSession.getUri();
+        logger.info ("serverSession uri: {}",sessionUri);
         ZuulWebSocketProperties.WsBrokerage wsBrokerage = getWebSocketBrokarage(
                 sessionUri);
-
+        logger.info ("WsBrokerage:");
         Assert.notNull(wsBrokerage, "wsBrokerage");
 
         String path = getWebSocketServerPath(wsBrokerage, sessionUri);
+        logger.info ("path: {}",path);
         Assert.notNull(path, "Web socket uri path");
 
         String routeHost = zuulPropertiesResolver.getRouteHost(wsBrokerage);
+        logger.info ("routeHost: {}",routeHost);
         Assert.notNull(routeHost, "routeHost");
 
         String uri = ServletUriComponentsBuilder.fromHttpUrl(routeHost).path(path)

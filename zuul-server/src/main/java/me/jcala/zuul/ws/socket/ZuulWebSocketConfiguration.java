@@ -57,12 +57,12 @@ public class ZuulWebSocketConfiguration implements ApplicationListener<ContextRe
   }
 
   @Bean
-  public RegisterWebSocketHandler registerWebSocketHandler(ZuulWebSocketProperties zuulWebSocketProperties){
-    return new RegisterWebSocketHandler (zuulWebSocketProperties);
+  public RegisterWebSocketHandler registerWebSocketHandler(ZuulWebSocketProperties zuulWebSocketProperties,
+                                                           ZuulPropertiesResolver zuulPropertiesResolver){
+    return new RegisterWebSocketHandler (zuulWebSocketProperties,zuulPropertiesResolver);
   }
 
   @Bean
-  @ConditionalOnMissingBean
   public ZuulPropertiesResolver zuulPropertiesResolver(final DiscoveryClient discoveryClient,
                                                        final ZuulProperties zuulProperties){
     return new EurekaPropertiesResolver (discoveryClient,zuulProperties);
