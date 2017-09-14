@@ -25,7 +25,7 @@ import org.springframework.web.socket.WebSocketHandler;
  */
 @Configuration
 @ConditionalOnWebApplication //当前项目是Web项目的条件
-@ConditionalOnProperty(prefix = "zuul.ws", name = "enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(prefix = "zuul.ws", name = "enabled")
 @ConditionalOnClass(WebSocketHandler.class)//当类路径下有指定的类的条件下
 @EnableConfigurationProperties(ZuulWebSocketProperties.class)
 public class ZuulWebSocketConfiguration implements ApplicationListener<ContextRefreshedEvent> {

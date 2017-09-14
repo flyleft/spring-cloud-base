@@ -12,10 +12,7 @@ import org.springframework.web.socket.handler.AbstractWebSocketHandler;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * Handles establishment and tracking of next 'hop', and
- * copies data from the current session to the next hop.
- */
+
 public class WebSocketProxyServerHandler extends AbstractWebSocketHandler {
     private static final Logger logger= LoggerFactory.getLogger (WebSocketProxyServerHandler.class);
     private final Map<String, NextHop> nextHops = new ConcurrentHashMap<>();
@@ -29,33 +26,33 @@ public class WebSocketProxyServerHandler extends AbstractWebSocketHandler {
     }
 
     @Override
-    public void handleMessage(WebSocketSession serverSession, WebSocketMessage<?> webSocketMessage) throws Exception {
-        getNextHop(serverSession).sendMessageToNextHop(webSocketMessage);
+    public void handleMessage(WebSocketSession backSession, WebSocketMessage<?> webSocketMessage) throws Exception {
+        throw new RuntimeException ("test");
+        //getNextHop(backSession).sendMessageToNextHop(webSocketMessage);
     }
 
-    private NextHop getNextHop(WebSocketSession serverSession) {
-        NextHop nextHop = nextHops.get(serverSession.getId());
+    private NextHop getNextHop(WebSocketSession backSession) {
+        NextHop nextHop = nextHops.get(backSession.getId());
         if (nextHop == null) {
-            nextHop = new NextHop(zuulWebSocketProperties,zuulPropertiesResolver,serverSession);
-            nextHops.put(serverSession.getId(), nextHop);
+            nextHop = new NextHop(zuulWebSocketProperties,zuulPropertiesResolver,backSession);
+            nextHops.put(backSession.getId(), nextHop);
         }
         return nextHop;
     }
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        logger.info ("============afterConnectionEstablished");
+        logger.info ("proxy server session {} ConnectionEstablished",session);
     }
 
 
     @Override
     public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
-        logger.info ("============handleTransportError");
+        logger.info ("proxy server session {} handleTransportError",session);
     }
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-        logger.info ("============afterConnectionClosed");
     }
 
     @Override

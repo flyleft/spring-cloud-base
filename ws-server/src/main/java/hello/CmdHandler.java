@@ -16,7 +16,7 @@ public class CmdHandler extends TextWebSocketHandler {
 
   @Override
   public void handleTextMessage(WebSocketSession session, TextMessage message) {
-    TextMessage msg = new TextMessage ("Hello, " + message.getPayload() + "!");
+    TextMessage msg = new TextMessage ("back, " + message.getPayload() + "!");
 
     logger.info("message received: {}", message.getPayload());
     try {

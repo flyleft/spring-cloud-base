@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 
 public class NextHop{
     private static final Logger logger= LoggerFactory.getLogger (NextHop.class);
-    private  WebSocketSession clientSession;
+    private  WebSocketSession sendSession;
 
     private ZuulWebSocketProperties zuulWebSocketProperties;
 
@@ -27,14 +27,14 @@ public class NextHop{
 
     public NextHop(ZuulWebSocketProperties zuulWebSocketProperties,
                    ZuulPropertiesResolver zuulPropertiesResolver,
-                   WebSocketSession serverSession) {
+                   WebSocketSession backSession) {
         this.zuulWebSocketProperties = zuulWebSocketProperties;
         this.zuulPropertiesResolver = zuulPropertiesResolver;
-        this.clientSession = createWebSocketClientSession(serverSession);
+        this.sendSession = createWebSocketClientSession(backSession);
     }
 
-    private WebSocketSession createWebSocketClientSession(WebSocketSession serverSession) {
-        URI sessionUri = serverSession.getUri();
+    private WebSocketSession createWebSocketClientSession(WebSocketSession backSession) {
+        URI sessionUri = backSession.getUri();
         ZuulWebSocketProperties.WsBrokerage wsBrokerage = getWebSocketBrokarage(
                 sessionUri);
         Assert.notNull(wsBrokerage, "wsBrokerage");
@@ -49,7 +49,7 @@ public class NextHop{
                 .toUriString().replaceFirst ("http","ws");
         try {
             return new StandardWebSocketClient ()
-                    .doHandshake(new WebSocketProxyClientHandler (serverSession),
+                    .doHandshake(new WebSocketProxyClientHandler (backSession),
                             uri)
                     .get(1000, TimeUnit.MILLISECONDS);
         } catch (Exception e) {
@@ -58,7 +58,10 @@ public class NextHop{
     }
 
     public void sendMessageToNextHop(WebSocketMessage<?> webSocketMessage) throws IOException {
-        clientSession.sendMessage(webSocketMessage);
+        logger.info ("sendSession: {} local: {} remote: {} msg: {}",sendSession,
+                sendSession.getLocalAddress (),sendSession.getRemoteAddress (),
+                webSocketMessage.getPayload ().toString ());
+        sendSession.sendMessage(webSocketMessage);
     }
 
     /**

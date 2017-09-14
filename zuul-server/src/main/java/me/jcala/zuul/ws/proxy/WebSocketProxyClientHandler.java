@@ -12,17 +12,20 @@ import org.springframework.web.socket.handler.AbstractWebSocketHandler;
  */
 public class WebSocketProxyClientHandler extends AbstractWebSocketHandler {
     private static final Logger logger= LoggerFactory.getLogger (WebSocketProxyClientHandler.class);
-    private final WebSocketSession serverSession;
+    private final WebSocketSession backSession;
 
-    public WebSocketProxyClientHandler(WebSocketSession serverSession) {
-        this.serverSession = serverSession;
+    public WebSocketProxyClientHandler(WebSocketSession backSession) {
+        this.backSession = backSession;
     }
 
     @Override
     public void handleMessage(WebSocketSession session, WebSocketMessage<?> webSocketMessage) throws Exception {
-        logger.info ("session: "+session);
-        logger.info ("serverSession: "+serverSession);
-        serverSession.sendMessage(webSocketMessage);
+        logger.info ("backSession: {} local: {} remote: {} msg: {}",
+                backSession,
+                backSession.getLocalAddress (),
+                backSession.getRemoteAddress (),
+                webSocketMessage.getPayload ().toString ());
+        backSession.sendMessage(webSocketMessage);
     }
 
     @Override
