@@ -51,6 +51,7 @@ zuul:
     aab:
       path: /aab/**
       serviceId: client-server-a
+      sensitiveHeaders: auth,name,asasa,sjksdsd,hdfhd
   semaphore:
     max-semaphores: 300
 security:

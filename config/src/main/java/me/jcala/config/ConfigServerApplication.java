@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * Created by zhipeng.zuo on 2017/8/30.
  */
-@SpringBootApplication(exclude = { RabbitAutoConfiguration.class })
+@SpringBootApplication
 @EnableConfigServer
 @EnableEurekaClient
 public class ConfigServerApplication {
