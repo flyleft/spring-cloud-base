@@ -48,8 +48,8 @@ zuul:
     dev:
       path: /dev/**
       serviceId: hap-dome-service
-    aaa:
-      path: /aaa/**
+    aaaa:
+      path: /aaaa/**
       serviceId: client-server-a
   semaphore:
     max-semaphores: 300
