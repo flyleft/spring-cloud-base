@@ -48,12 +48,6 @@ zuul:
     dev:
       path: /dev/**
       serviceId: hap-dome-service
-      sensitiveHeaders:
-        - auth
-        - name
-        - aaa
-        - bbb
-        - ccc
     aab:
       path: /aab/**
       serviceId: client-server-a
