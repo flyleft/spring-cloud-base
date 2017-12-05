@@ -1,0 +1,2 @@
+org.springframework.cloud.bootstrap.BootstrapConfiguration=\
+me.jcala.cloud.spring.jar.test.TestConfig

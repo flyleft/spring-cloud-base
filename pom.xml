@@ -19,6 +19,7 @@
         <module>bus-by-rabbitmq</module>
         <module>ws-server</module>
         <module>zuul-server</module>
+        <module>spring-jar-test</module>
     </modules>
 
     <parent>
@@ -57,7 +58,7 @@
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>Dalston.RELEASE</version>
+                <version>Dalston.SR4</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

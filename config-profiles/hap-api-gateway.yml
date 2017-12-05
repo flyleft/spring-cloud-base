@@ -49,7 +49,7 @@ zuul:
       path: /dev/**
       serviceId: hap-dome-service
     aab:
-      path: /aab/**
+      path: /you/**
       serviceId: client-server-a
       sensitiveHeaders: auth,name,asasa,sjksdsd,hdfhd
   semaphore:
