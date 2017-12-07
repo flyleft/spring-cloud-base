@@ -2,7 +2,7 @@ server:
   port: 8769
 spring:
   application:
-    name: config-server
+    name: hap-config-server
   cloud:
     config:
       server:

@@ -32,7 +32,7 @@ zuul:
             refresh-interval: 1 # 该服务针对该用户的访问次数刷新的时间周期
   routes:
     uaa:
-      path: /uaa/**
+      path: /uaaaaaaaa/**
       serviceId: hap-user-service
     fws:
       path: /fws/**
