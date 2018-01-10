@@ -7,8 +7,3 @@ server:
 spring:
   application:
     name: zuul-service
-zuul:
-  routes:
-    client-a:
-      path: /client-a/**
-      serviceId: client-server-a

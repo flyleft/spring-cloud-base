@@ -20,6 +20,7 @@
         <module>ws-server</module>
         <module>zuul-server</module>
         <module>spring-jar-test</module>
+        <module>consumer-by-feign</module>
     </modules>
 
     <parent>

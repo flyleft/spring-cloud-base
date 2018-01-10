@@ -7,3 +7,6 @@ zuul:
     consumer:
       path: /consumer/**
       serviceId: consumer-ribbon
+    uaa:
+      path: /uaa/**
+      serviceId: hap-user-service
