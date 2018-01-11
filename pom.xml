@@ -16,7 +16,6 @@
         <module>consumer-by-ribbon-and-hystrix</module>
         <module>config</module>
         <module>config-client</module>
-        <module>bus-by-rabbitmq</module>
         <module>ws-server</module>
         <module>zuul-server</module>
         <module>spring-jar-test</module>

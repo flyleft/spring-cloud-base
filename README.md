@@ -1,0 +1,10 @@
+- register: eureka
+- zuul: 网关
+- config: 配置服务器
+- config-client: 配置服务客户端
+- client-a: 最简单的eureka服务
+- consumer-by-feign: 使用feign调用其他服务接口
+- consumer-by-ribbon: 使用ribbon调用其他服务接口
+- consumer-by-ribbon-and-hystrix: 使用ribbon和hytrix熔断调用其他服务接口
+- ws-server: websocket测试服务器
+- zuul-server: 简单实现zuul中介websocket
