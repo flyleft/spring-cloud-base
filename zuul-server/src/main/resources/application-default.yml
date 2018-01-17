@@ -1,9 +1,12 @@
 zuul:
   addHostHeader: true
   routes:
-    hello:
-      serviceId: ws-server
-  ws:
-    brokerages:
-      hello:
-        end-points: /test
+    client_a:
+      path: /client_a/**
+      serviceId: client-server-a
+    consumer:
+      path: /consumer/**
+      serviceId: consumer-ribbon
+    uaa:
+      path: /uaa/**
+      serviceId: hap-user-service

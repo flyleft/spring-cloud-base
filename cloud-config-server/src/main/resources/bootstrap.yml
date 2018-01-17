@@ -1,0 +1,27 @@
+server:
+  port: 8769
+spring:
+  application:
+    name: cloud-config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/jcalaz/spring-cloud-base.git
+          searchPaths: config-profiles
+          default-label: master
+        bootstrap: true
+eureka:
+  instance:
+    preferIpAddress: true
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 3
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_DEFAULT_ZONE:http://localhost:8000/eureka/}
+    registryFetchIntervalSeconds: 1
+management:
+  port: 8011
+  address: 127.0.0.1
+  security:
+    enabled: false

@@ -1,0 +1,23 @@
+server:
+  port: 8000
+eureka:
+  instance:
+    hostname: localhost
+  server:
+    enable-self-preservation: false
+  client:
+    # registerWithEureka: false # 不向注册中心注册自己
+    fetchRegistry: false # 检索服务
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+spring:
+  application:
+    name: eureka-register-server
+  rabbitmq:
+    host: localhost
+    port: 5672
+  cloud:
+    stream:
+      bindings:
+        output:
+          destination: eureka-instance
