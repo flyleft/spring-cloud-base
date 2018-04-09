@@ -11,6 +11,10 @@ eureka:
     serviceUrl:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
 spring:
+  datasource:
+    url: jdbc:mysql://localhost/manager_service?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: hapcloud
+    password: handhand
   application:
     name: eureka-register-server
   rabbitmq:

@@ -9,17 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>zuul</artifactId>
+    <artifactId>zuul-gateway</artifactId>
 
- <dependencies>
-     <dependency>
-         <groupId>org.springframework.cloud</groupId>
-         <artifactId>spring-cloud-starter-eureka</artifactId>
-     </dependency>
 
-     <dependency>
-         <groupId>org.springframework.cloud</groupId>
-         <artifactId>spring-cloud-starter-zuul</artifactId>
-     </dependency>
- </dependencies>
 </project>
