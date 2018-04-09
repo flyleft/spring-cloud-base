@@ -36,8 +36,7 @@ public class OrderServiceImpl  implements OrderService {
                         throw new CommonException("error.order.create.insert");
                     }
                     //根据业务处理结果，重新设置payload的值
-                    RepertoryPayload repertoryPayload = (RepertoryPayload)messageList.get(0).getPayload();
-                    repertoryPayload.setOrderId(order.getId());
+                    payload.setOrderId(order.getId());
                 });
 
         if (!result) {
