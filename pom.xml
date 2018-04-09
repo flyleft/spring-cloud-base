@@ -21,6 +21,7 @@
         <module>spring-jar-test</module>
         <module>consumer-by-feign</module>
         <module>event-producer-demo</module>
+        <module>event-consumer-demo</module>
     </modules>
 
     <parent>
