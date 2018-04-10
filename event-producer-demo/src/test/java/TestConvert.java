@@ -49,33 +49,6 @@ public class TestConvert {
         }
     }
 
-    @Test
-    public void convertTest() {
-        RepertoryPayload payload = new RepertoryPayload("apple", 3);
-
-        EventMessage eventMessage = new EventMessage("orderTopic", payload);
-
-        List<EventMessage> messages = Collections.singletonList(eventMessage);
-
-        String json = convert(messages);
-
-        System.out.println(json);
-
-        List<EventSendMsg> list = convertSendMsg(json);
-
-    }
-
-    public List<EventSendMsg> convertSendMsg(String messages) {
-
-        List<EventSendMsg> messageList = Collections.emptyList();
-        try {
-            messageList = mapper.readValue(messages, new TypeReference<List<EventSendMsg>>(){});
-        } catch (IOException e) {
-            e.printStackTrace();
-            LOGGER.info("error.EventConvert.convertSendMsg");
-        }
-        return messageList;
-    }
 
 
 }

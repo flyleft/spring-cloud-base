@@ -2,25 +2,15 @@ package me.jcala.eureka.event.consumer.domain;
 
 /**
  * @author flyleft
- * @date 2018/4/9
+ * @date 2018/4/10
  */
-public class OrderDTO {
-
-    private String uuid;
+public class RepertoryPayload {
 
     private String type;
 
     private int reduceNum;
 
     private long orderId;
-
-    public String getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
-    }
 
     public String getType() {
         return type;
@@ -44,5 +34,22 @@ public class OrderDTO {
 
     public void setOrderId(long orderId) {
         this.orderId = orderId;
+    }
+
+    public RepertoryPayload() {
+    }
+
+    public RepertoryPayload(String type, int reduceNum) {
+        this.type = type;
+        this.reduceNum = reduceNum;
+    }
+
+    @Override
+    public String toString() {
+        return "RepertoryPayload{" +
+                "type='" + type + '\'' +
+                ", reduceNum=" + reduceNum +
+                ", orderId=" + orderId +
+                '}';
     }
 }

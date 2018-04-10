@@ -25,7 +25,7 @@ public class InitData {
         }
         Repertory repertory = new Repertory();
         repertory.setNum(2334L);
-        repertory.setType("apple");
+        repertory.setItemType("apple");
         repertoryMapper.insert(repertory);
     }
 

@@ -1,17 +1,16 @@
 package me.jcala.eureka.event.consumer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.choerodon.core.event.EventPayload;
 import io.choerodon.core.exception.CommonException;
-import io.choerodon.event.consumer.annotation.Topic;
-import me.jcala.eureka.event.consumer.domain.OrderDTO;
+import io.choerodon.event.consumer.annotation.EventListener;
 import me.jcala.eureka.event.consumer.domain.Repertory;
+import me.jcala.eureka.event.consumer.domain.RepertoryPayload;
 import me.jcala.eureka.event.consumer.mapper.RepertoryMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.io.IOException;
 
 /**
  * @author flyleft
@@ -27,24 +26,21 @@ public class OrderEventHandler {
     @Autowired
     private RepertoryMapper repertoryMapper;
 
-    @Topic("order-topic")
-    public void messgae(String message) {
-        try {
-            OrderDTO dto = mapper.readValue(message, OrderDTO.class);
-            Repertory repertory = new Repertory();
-            repertory.setType(dto.getType());
-            Repertory selectRep = repertoryMapper.selectOne(repertory);
-            if (selectRep == null) {
-                throw new CommonException("error.repertory.notExist");
-            }
-            if (selectRep.getNum() < dto.getReduceNum()) {
-                throw new CommonException("error.repertory.notEnough");
-            }
-            selectRep.setNum(selectRep.getNum() - dto.getReduceNum());
-            repertoryMapper.updateByPrimaryKey(selectRep);
-        } catch (IOException e) {
-            e.printStackTrace();
+    @EventListener(topic = "event-producer-demo", businessType = "reduceStock")
+    public void messgae(EventPayload<RepertoryPayload> payload) {
+        RepertoryPayload data = payload.getData();
+        LOGGER.info("data: {}", data);
+        Repertory repertory = new Repertory();
+        repertory.setItemType(data.getType());
+        Repertory selectRep = repertoryMapper.selectOne(repertory);
+        if (selectRep == null) {
+            throw new CommonException("error.repertory.notExist");
         }
+        if (selectRep.getNum() < data.getReduceNum()) {
+            throw new CommonException("error.repertory.notEnough");
+        }
+        selectRep.setNum(selectRep.getNum() - data.getReduceNum());
+        repertoryMapper.updateByPrimaryKey(selectRep);
     }
 
 }

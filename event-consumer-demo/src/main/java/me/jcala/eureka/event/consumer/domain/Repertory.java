@@ -17,16 +17,16 @@ public class Repertory {
     @GeneratedValue
     private Long id;
 
-    private String type;
+    private String itemType;
 
     private Long num;
 
-    public String getType() {
-        return type;
+    public String getItemType() {
+        return itemType;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setItemType(String itemType) {
+        this.itemType = itemType;
     }
 
     public Long getNum() {
@@ -40,7 +40,7 @@ public class Repertory {
     public Repertory() {
     }
 
-    public Repertory(String type) {
-        this.type = type;
+    public Repertory(String itemType) {
+        this.itemType = itemType;
     }
 }

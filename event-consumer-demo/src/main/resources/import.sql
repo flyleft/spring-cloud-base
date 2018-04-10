@@ -10,7 +10,7 @@ DROP TABLE IF EXISTS `repertory_tb`;
 
 CREATE TABLE `repertory_tb` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `type` varchar(80) NOT NULL,
+  `item_type` varchar(80) NOT NULL,
   `num` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -1,12 +1,10 @@
 package me.jcala.eureka.event.producer.domain;
 
-import io.choerodon.event.producer.execute.BasePayload;
-
 /**
  * @author flyleft
  * @date 2018/4/9
  */
-public class RepertoryPayload extends BasePayload {
+public class RepertoryPayload {
 
     private String type;
 
