@@ -2,6 +2,7 @@ package me.jcala.eureka.event.producer.service;
 
 import io.choerodon.core.exception.CommonException;
 import io.choerodon.event.producer.execute.EventProducerTemplate;
+import me.jcala.eureka.event.producer.domain.MoneyPayload;
 import me.jcala.eureka.event.producer.domain.Order;
 import me.jcala.eureka.event.producer.domain.RepertoryPayload;
 import me.jcala.eureka.event.producer.mapper.OrderMapper;
@@ -23,8 +24,12 @@ public class OrderServiceImpl  implements OrderService {
 
     @Override
     public void createOrder(Order order) {
-        RepertoryPayload payload = new RepertoryPayload("apple", 3);
+        createOrderOne(order);
+        createOrderTwo(order);
+    }
 
+    private void createOrderOne(Order order) {
+        RepertoryPayload payload = new RepertoryPayload("apple", 3);
         /**
          * producerType: 用于接口回查
          * consumerType: 用于消费时区分不同业务类型
@@ -41,6 +46,24 @@ public class OrderServiceImpl  implements OrderService {
                     }
                     //根据业务处理结果，重新设置payload的值
                     payload.setOrderId(order.getId());
+                });
+
+        if (!result) {
+            throw new CommonException("error.order.create");
+        }
+    }
+
+    private void createOrderTwo(Order order) {
+        MoneyPayload moneyPayload = new MoneyPayload(10L, 8L, 233L);
+        boolean result = producerTemplate.execute("order", "money" ,
+                "event-producer-demo", moneyPayload,
+                (String uuid) -> {
+                    order.setId(null);
+                    order.setUuid(uuid);
+                    order.setName(uuid);
+                    if (orderMapper.insert(order) != 1) {
+                        throw new CommonException("error.order.create.insert");
+                    }
                 });
 
         if (!result) {

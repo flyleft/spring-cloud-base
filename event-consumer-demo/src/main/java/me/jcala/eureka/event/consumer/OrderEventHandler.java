@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.choerodon.core.event.EventPayload;
 import io.choerodon.core.exception.CommonException;
 import io.choerodon.event.consumer.annotation.EventListener;
+import me.jcala.eureka.event.consumer.domain.MoneyPayload;
 import me.jcala.eureka.event.consumer.domain.Repertory;
 import me.jcala.eureka.event.consumer.domain.RepertoryPayload;
 import me.jcala.eureka.event.consumer.mapper.RepertoryMapper;
@@ -26,6 +27,13 @@ public class OrderEventHandler {
     @Autowired
     private RepertoryMapper repertoryMapper;
 
+
+    @EventListener(topic = "event-producer-demo", businessType = "money")
+    public void messssgae(EventPayload<MoneyPayload> payload) {
+        MoneyPayload data = payload.getData();
+        LOGGER.info("data: {}", data);
+    }
+
     @EventListener(topic = "event-producer-demo", businessType = "reduceStock")
     public void messgae(EventPayload<RepertoryPayload> payload) {
         RepertoryPayload data = payload.getData();
@@ -42,5 +50,6 @@ public class OrderEventHandler {
         selectRep.setNum(selectRep.getNum() - data.getReduceNum());
         repertoryMapper.updateByPrimaryKey(selectRep);
     }
+
 
 }
