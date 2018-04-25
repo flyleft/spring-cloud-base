@@ -17,11 +17,12 @@
         <module>cloud-config-server</module>
         <module>cloud-config-client</module>
         <module>ws-server</module>
-        <module>zuul-server</module>
         <module>spring-jar-test</module>
         <module>consumer-by-feign</module>
         <module>event-producer-demo</module>
         <module>event-consumer-demo</module>
+        <module>cloud-config-client-two</module>
+        <module>custom-gateway-helper</module>
     </modules>
 
     <parent>

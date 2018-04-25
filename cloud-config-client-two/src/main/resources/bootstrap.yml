@@ -1,5 +1,5 @@
 server:
-    port: 8770
+    port: 8970
 eureka:
     client:
         serviceUrl:
@@ -15,7 +15,7 @@ spring:
 #      name: config_client
   cloud:
     bus:
-       enabled: true
+      enabled: true
     config:
       failFast: true
       uri: ${SPRING_CLOUD_CONFIG_URI:http://localhost:8010}

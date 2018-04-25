@@ -1,10 +1,10 @@
-package event.consumer;
+package me.jcala.eureka.event.consumer.domain;
 
 /**
  * @author flyleft
- * @date 2018/4/10
+ * @date 2018/4/12
  */
-public class PersonPayload {
+public class Person {
 
     private String name;
 
@@ -26,19 +26,11 @@ public class PersonPayload {
         this.age = age;
     }
 
-    public PersonPayload() {
-    }
-
-    public PersonPayload(String name, int age) {
+    public Person(String name, int age) {
         this.name = name;
         this.age = age;
     }
 
-    @Override
-    public String toString() {
-        return "PersonPayload{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                '}';
+    public Person() {
     }
 }

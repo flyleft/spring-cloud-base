@@ -1,0 +1,4 @@
+spring:
+  cloud:
+    config:
+      label: 1.0.0-SNAPSHOT

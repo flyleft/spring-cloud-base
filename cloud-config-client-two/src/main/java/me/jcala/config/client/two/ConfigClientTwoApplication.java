@@ -1,4 +1,4 @@
-package me.jcala.config.client;
+package me.jcala.config.client.two;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,19 +10,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Created by zhipeng.zuo on 2017/8/30.
+ * @author flyleft
+ * @date 2018/4/24
  */
 @SpringBootApplication
 @RefreshScope
 @RestController
 @EnableEurekaClient
-public class ConfigClientApplication {
+public class ConfigClientTwoApplication {
 
     @Autowired
     private Environment env;
 
     public static void main(String[] args) {
-        new SpringApplicationBuilder(ConfigClientApplication.class).web(true).run(args);
+        new SpringApplicationBuilder(ConfigClientTwoApplication.class).web(true).run(args);
     }
 
     @GetMapping("/info_by_env")

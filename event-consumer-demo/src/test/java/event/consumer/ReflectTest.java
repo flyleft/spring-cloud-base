@@ -1,8 +1,12 @@
 package event.consumer;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.choerodon.core.event.EventPayload;
+import me.jcala.eureka.event.consumer.domain.MoneyPayload;
+import me.jcala.eureka.event.consumer.domain.PersonPayload;
 import org.junit.Test;
 import sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl;
 
@@ -43,12 +47,46 @@ public class ReflectTest {
         };
         PersonPayload personPayload = new PersonPayload("sdsdsd",23);
         EventPayload<PersonPayload> eventPayload = new EventPayload<>();
-        eventPayload.setT(personPayload);
+        eventPayload.setData(personPayload);
         eventPayload.setUuid("sdsd");
-        eventPayload.setType("sdsdddddddd");
+        eventPayload.setBusinessType("sdsdddddddd");
         String json = mapper.writeValueAsString(eventPayload);
-        EventPayload<?> eventPayload1 = mapper.readValue(json, typeReference);
+        System.out.println(json);
+        EventPayload<?> eventPayload1 = null;
+        try {
+            eventPayload1 = JSON.parseObject("ssd", EventPayload.class);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         System.out.println(eventPayload1);
     }
+
+    @Test
+    public void payload() throws Exception{
+        MoneyPayload moneyPayload = new MoneyPayload();
+        moneyPayload.setAccount(10L);
+        moneyPayload.setMoneyFromUserId(20L);
+        moneyPayload.setMoneyToUserId(22L);
+        EventPayload<MoneyPayload> payload = new EventPayload<>();
+        payload.setUuid("s82822992999sd");
+        payload.setBusinessType("money");
+        payload.setData(moneyPayload);
+        String json = mapper.writeValueAsString(payload);
+        System.out.println(json);
+        EventPayload<?> data =  mapper.readValue(json,  new TypeReference<EventPayload<MoneyPayload>>(){});
+        System.out.println(data.getData());
+    }
+
+    public  String getBusinessType (String message) {
+        String businessType = null;
+        try {
+            businessType = mapper.readTree(message).get("businessType").toString();
+            businessType = businessType.substring(1, businessType.length() - 1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return businessType;
+    }
+
 
 }
