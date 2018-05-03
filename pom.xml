@@ -25,6 +25,7 @@
         <module>boot-web</module>
         <module>zuul-gateway</module>
         <module>custom-gateway-helper</module>
+        <module>state-machine</module>
     </modules>
 
     <parent>
