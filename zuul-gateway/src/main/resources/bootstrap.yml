@@ -1,0 +1,49 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_DEFAULT_ZONE:http://localhost:8000/eureka/}
+server:
+  port: 8090
+spring:
+  application:
+    name: zuul-gateway
+hystrix:
+  command:
+    consumer-feign-service:
+      circuitBreaker:
+        enabled: false
+      execution:
+        isolation:
+#          strategy: THREAD
+          strategy: SEMAPHORE
+          semaphore:
+            maxConcurrentRequests: 500
+          thread:
+              timeoutInMilliseconds: 30000
+    default:
+      circuitBreaker:
+            sleepWindowInMilliseconds: 30000
+            requestVolumeThreshold: 20
+      execution:
+        isolation:
+          strategy: THREAD
+          thread:
+            timeoutInMilliseconds: 30000
+  threadpool:
+      consumer-feign-service:
+        coreSize: 10
+      default:
+        # Maximum number of concurrent requests when using thread pools (Default: 10)
+        coreSize: 100
+        # Maximum LinkedBlockingQueue size - -1 for using SynchronousQueue (Default: -1)
+        maxQueueSize: -1
+        # Queue size rejection threshold (Default: 5)
+        queueSizeRejectionThreshold: 5
+ribbon:
+  MaxConnectionsPerHost: 50
+  ReadTimeout: 30000
+  ConnectTimeout: 30000
+  httpclient:
+    enabled: true
+  okhttp:
+    enabled: false

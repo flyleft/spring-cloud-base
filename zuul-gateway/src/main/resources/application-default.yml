@@ -1,0 +1,6 @@
+zuul:
+  addHostHeader: true
+  routes:
+     cfs:
+       path: /cfs/**
+       serviceId: consumer-feign-service
