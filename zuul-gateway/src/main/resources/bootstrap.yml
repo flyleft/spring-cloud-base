@@ -8,8 +8,8 @@ server:
     io-threads: 100
     worker-threads: 100
   tomcat:
-    max-threads: 1200
-    max-connections: 1200
+    max-threads: 1100
+    max-connections: 1100
 spring:
   application:
     name: zuul-gateway
@@ -23,7 +23,7 @@ hystrix:
           strategy: THREAD
 #          strategy: SEMAPHORE
           semaphore:
-            maxConcurrentRequests: 1000
+            maxConcurrentRequests: 1100
           thread:
               timeoutInMilliseconds: 30000
     default:
@@ -37,17 +37,17 @@ hystrix:
             timeoutInMilliseconds: 30000
   threadpool:
       consumer-feign-service:
-        coreSize: 1100
+        coreSize: 1000
       default:
         # Maximum number of concurrent requests when using thread pools (Default: 10)
-        coreSize: 1100
+        coreSize: 1000
         # Maximum LinkedBlockingQueue size - -1 for using SynchronousQueue (Default: -1)
         maxQueueSize: -1
         # Queue size rejection threshold (Default: 5)
         queueSizeRejectionThreshold: 20
 ribbon:
-  MaxConnectionsPerHost: 1100
-  MaxTotalConnections: 1100
+  MaxConnectionsPerHost: 2000
+  MaxTotalConnections: 1000
   ReadTimeout: 30000
   ConnectTimeout: 30000
   httpclient:
