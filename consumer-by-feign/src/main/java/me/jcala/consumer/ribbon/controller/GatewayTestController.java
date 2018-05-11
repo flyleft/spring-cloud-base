@@ -18,7 +18,7 @@ public class GatewayTestController {
     public String test() {
         try {
             logger.info("=== {}", System.currentTimeMillis());
-            Thread.sleep(4000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

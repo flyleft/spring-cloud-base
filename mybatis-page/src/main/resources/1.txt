@@ -1,0 +1,8 @@
+SELECT mybatis_user.id,
+            mybatis_user.username,
+            mybatis_user.password,
+            mybatis_role.name,
+            mybatis_role.level
+            FROM mybatis_user
+            LEFT JOIN mybatis_user_role ON mybatis_user_role.user_id = mybatis_user.id
+            LEFT JOIN mybatis_role ON mybatis_user_role.role_id = mybatis_role.id
