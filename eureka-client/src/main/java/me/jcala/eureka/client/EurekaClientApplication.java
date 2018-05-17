@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author zhipeng.zuo
  */
 @SpringBootApplication
-//@EnableEurekaClient
+@EnableEurekaClient
 @RestController
 public class EurekaClientApplication {
 

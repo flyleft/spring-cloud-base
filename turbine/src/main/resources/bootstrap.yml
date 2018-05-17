@@ -1,0 +1,28 @@
+info:
+  component: Hystrix Dashboard
+endpoints:
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+server:
+  port: 8880
+  tomcat:
+      max-threads: 1100
+      max-connections: 1100
+eureka:
+  client:
+    serviceUrl:
+      defaultZone:    http://127.0.0.1:8000/eureka/
+spring:
+   application:
+     name:  turbine-service
+   cloud:
+     stream:
+       default-binder: kafka
+turbine:
+  app-config: hystrix-consumer
+  combine-host-port: true
+  aggregator:
+    clusterConfig: MAIN
+  clusterNameExpression: metadata['cluster']

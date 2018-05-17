@@ -26,6 +26,7 @@
         <module>custom-gateway-helper</module>
         <module>state-machine</module>
         <module>mybatis-page</module>
+        <module>turbine</module>
     </modules>
 
     <parent>

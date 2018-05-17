@@ -1,5 +1,8 @@
 zuul:
   addHostHeader: true
+  FormBodyWrapperFilter:
+    pre:
+      disable: true
   routes:
      cfs:
        path: /cfs/**

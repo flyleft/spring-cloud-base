@@ -36,7 +36,7 @@ public class OrderServiceImpl  implements OrderService {
          * topic： 以当前服务名命名。
          * 如果producerType和consumerType一样，可以调用execute(String type, String topic, Object payload, EventExecuter executer)
          */
-        boolean result = producerTemplate.execute("order", "reduceStock" ,
+        Exception exception = producerTemplate.execute("order", "reduceStock" ,
                 "event-producer-demo", payload,
                 (String uuid) -> {
                     order.setUuid(uuid);
@@ -48,14 +48,14 @@ public class OrderServiceImpl  implements OrderService {
                     payload.setOrderId(order.getId());
                 });
 
-        if (!result) {
-            throw new CommonException("error.order.create");
+        if (exception != null) {
+            throw new CommonException(exception.getMessage());
         }
     }
 
     private void createOrderTwo(Order order) {
         MoneyPayload moneyPayload = new MoneyPayload(10L, 8L, 233L);
-        boolean result = producerTemplate.execute("order", "money" ,
+        Exception exception = producerTemplate.execute("order", "money" ,
                 "event-producer-demo", moneyPayload,
                 (String uuid) -> {
                     order.setId(null);
@@ -66,8 +66,8 @@ public class OrderServiceImpl  implements OrderService {
                     }
                 });
 
-        if (!result) {
-            throw new CommonException("error.order.create");
+        if (exception != null) {
+            throw new CommonException(exception.getMessage());
         }
     }
 

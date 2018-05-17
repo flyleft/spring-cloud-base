@@ -2,6 +2,8 @@ eureka:
   client:
     serviceUrl:
       defaultZone: ${EUREKA_DEFAULT_ZONE:http://localhost:8000/eureka/}
+  instance:
+      metadata-map.cluster: MAIN
 server:
   port: 8090
   undertow:
@@ -54,3 +56,7 @@ ribbon:
     enabled: false
   okhttp:
     enabled: true
+management:
+  port: 8091
+  security:
+    enabled: false
