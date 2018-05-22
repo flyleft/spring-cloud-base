@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 @EnableEurekaClient
 @EnableFeignClients
-@EnableHystrixDashboard
+//@EnableHystrixDashboard
 @RestController
 public class FeignConsumerApplication {
 

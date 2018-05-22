@@ -1,8 +1,8 @@
 server:
   port: 8768
   tomcat:
-      max-threads: 1100
-      max-connections: 1100
+      max-threads: 600
+      max-connections: 600
 eureka:
   client:
     serviceUrl:

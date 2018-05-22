@@ -2,16 +2,11 @@ eureka:
   client:
     serviceUrl:
       defaultZone: ${EUREKA_DEFAULT_ZONE:http://localhost:8000/eureka/}
-  instance:
-      metadata-map.cluster: MAIN
 server:
-  port: 8090
-  undertow:
-    io-threads: 100
-    worker-threads: 100
   tomcat:
-    max-threads: 1100
-    max-connections: 1100
+    max-threads: 600
+    max-connections: 600
+  port: 8090
 spring:
   application:
     name: zuul-gateway
@@ -25,13 +20,10 @@ hystrix:
           strategy: THREAD
 #          strategy: SEMAPHORE
           semaphore:
-            maxConcurrentRequests: 1100
+            maxConcurrentRequests: 600
           thread:
               timeoutInMilliseconds: 30000
     default:
-      circuitBreaker:
-            sleepWindowInMilliseconds: 30000
-            requestVolumeThreshold: 20
       execution:
         isolation:
           strategy: THREAD
@@ -39,10 +31,10 @@ hystrix:
             timeoutInMilliseconds: 30000
   threadpool:
       consumer-feign-service:
-        coreSize: 1000
+        coreSize: 600
       default:
         # Maximum number of concurrent requests when using thread pools (Default: 10)
-        coreSize: 1000
+        coreSize: 600
         # Maximum LinkedBlockingQueue size - -1 for using SynchronousQueue (Default: -1)
         maxQueueSize: -1
         # Queue size rejection threshold (Default: 5)
