@@ -6,7 +6,13 @@ server:
   tomcat:
     max-threads: 600
     max-connections: 600
+    accept-count: 2000
   port: 8090
+  undertow:
+    worker-threads: 600
+    io-threads: 8
+    direct-buffers: true
+    buffer-size: 1024
 spring:
   application:
     name: zuul-gateway
@@ -36,9 +42,9 @@ hystrix:
         # Maximum number of concurrent requests when using thread pools (Default: 10)
         coreSize: 600
         # Maximum LinkedBlockingQueue size - -1 for using SynchronousQueue (Default: -1)
-        maxQueueSize: -1
+        maxQueueSize: 1000
         # Queue size rejection threshold (Default: 5)
-        queueSizeRejectionThreshold: 20
+        queueSizeRejectionThreshold: 800
 ribbon:
   MaxConnectionsPerHost: 2000
   MaxTotalConnections: 1000
