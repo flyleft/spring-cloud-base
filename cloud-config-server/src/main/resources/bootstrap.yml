@@ -1,6 +1,8 @@
 server:
   port: 8769
 spring:
+  profiles:
+    active: native
   application:
     name: cloud-config-server
   cloud:
@@ -11,6 +13,8 @@ spring:
           searchPaths: config-profiles
           default-label: master
         bootstrap: true
+        native:
+          search-locations: /Users/jcala/work/code/self/spring-cloud-base/config-profiles
 eureka:
   instance:
     preferIpAddress: true

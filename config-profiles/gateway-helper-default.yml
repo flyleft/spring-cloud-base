@@ -48,23 +48,9 @@ zuul:
     iam:
       path: /iam/**
       serviceId: iam-service
-    oauth:
-      path: /oauth/**
-      sensitiveHeaders:
-      serviceId: oauth-server
-      stripPrefix: false
-    notify:
-      path: /notify/**
-      serviceId: notification-service
-    manager:
-      path: /manager/**
-      serviceId: manager-service
-    file:
-      path: /file/**
-      serviceId: file-service
-    org:
-      path: /org/**
-      serviceId: organization-service
+    zuu:
+      path: /zuu/**
+      serviceId: zuu-service
   semaphore:
     max-semaphores: 300
   sensitiveHeaders: Cookie,Set-Cookie
