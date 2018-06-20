@@ -43,4 +43,21 @@ public class Repertory {
     public Repertory(String itemType) {
         this.itemType = itemType;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Repertory{" +
+                "id=" + id +
+                ", itemType='" + itemType + '\'' +
+                ", num=" + num +
+                '}';
+    }
 }

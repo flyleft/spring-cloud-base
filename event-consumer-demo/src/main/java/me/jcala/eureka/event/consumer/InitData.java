@@ -20,13 +20,21 @@ public class InitData {
     @PostConstruct
     public void initData() {
         int count = repertoryMapper.selectCount(new Repertory("apple"));
-        if (count > 0) {
-            return;
+        if (count < 1) {
+            Repertory repertory = new Repertory();
+            repertory.setNum(2334L);
+            repertory.setItemType("apple");
+            repertoryMapper.insert(repertory);
+            repertory.setId(null);
+            repertoryMapper.insert(repertory);
+            repertory.setId(null);
+            repertoryMapper.insert(repertory);
         }
-        Repertory repertory = new Repertory();
-        repertory.setNum(2334L);
-        repertory.setItemType("apple");
-        repertoryMapper.insert(repertory);
+
+        Repertory repertory11 = new Repertory();
+        repertory11.setNum(2334L);
+        Repertory select = repertoryMapper.selectOne(repertory11);
+        System.out.println(select);
     }
 
 }

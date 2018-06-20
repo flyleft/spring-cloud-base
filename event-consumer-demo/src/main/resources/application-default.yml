@@ -26,3 +26,5 @@ choerodon:
 logging:
   level:
     io.choerodon.event.consumer: debug
+    io.choerodon.mybatis: debug
+    me.jcala.eureka.event.consumer.mapper: debug

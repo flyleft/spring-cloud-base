@@ -27,6 +27,8 @@
         <module>state-machine</module>
         <module>mybatis-page</module>
         <module>turbine</module>
+        <module>spring-cloud-gateway-demo</module>
+        <module>choerodon-service-demo</module>
     </modules>
 
     <parent>
