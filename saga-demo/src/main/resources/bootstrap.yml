@@ -1,0 +1,15 @@
+server:
+  port: 8895
+eureka:
+  client:
+    serviceUrl:
+      defaultZone:    http://127.0.0.1:8000/eureka/
+spring:
+   application:
+     name:  quartz-shcedule
+   datasource:
+     url: jdbc:mysql://localhost/saga_demo?useUnicode=true&characterEncoding=utf-8&useSSL=false
+     username: root
+     password: root
+     initialize: true
+     schema: classpath:schema-mysql.sql

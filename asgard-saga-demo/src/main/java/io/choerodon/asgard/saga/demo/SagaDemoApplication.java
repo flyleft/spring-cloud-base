@@ -1,15 +1,17 @@
-package me.flyleft.choerodon.demo;
+package io.choerodon.asgard.saga.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.netflix.feign.EnableFeignClients;
 
-@EnableEurekaClient
 @SpringBootApplication
-public class ChoerodonDemoApplication {
+@EnableFeignClients("io.choerodon")
+@EnableEurekaClient
+public class SagaDemoApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ChoerodonDemoApplication.class, args);
+        SpringApplication.run(SagaDemoApplication.class, args);
     }
 
 }

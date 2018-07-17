@@ -1,0 +1,45 @@
+server:
+  port: 8768
+  tomcat:
+      max-threads: 600
+      max-connections: 600
+eureka:
+  client:
+    serviceUrl:
+      defaultZone:  http://127.0.0.1:8000/eureka/
+spring:
+   application:
+     name:  asgard-saga-demo
+   cloud:
+      config:
+        failFast: true
+        retry:
+          maxAttempts: 6
+          multiplier: 1.5
+          maxInterval: 2000
+        uri: localhost:8010
+        enabled: false
+   datasource:
+     url: jdbc:mysql://localhost/asgard-saga-demo?useUnicode=true&characterEncoding=utf-8&useSSL=false
+     username: root
+     password: root
+     initialize: true
+     schema: classpath:import.sql
+mybatis:
+  mapperLocations: classpath*:/mapper/*.xml
+  configuration: # 数据库下划线转驼峰配置
+    mapUnderscoreToCamelCase: true
+choerodon:
+  saga:
+    enabled: true
+    poll-interval: 10
+    max-execute-thread: 9
+security:
+  basic:
+    enabled: false
+logging:
+  level:
+    io.choerodon.asgard.saga: debug
+ribbon:
+  ReadTimeout: 5000
+  ConnectTimeout: 5000

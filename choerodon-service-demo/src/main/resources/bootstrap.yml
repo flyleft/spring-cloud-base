@@ -1,9 +1,0 @@
-server:
-  port: 8965
-spring:
-  application:
-    name: choerodon-demo-service
-management:
-  port: 8966
-  security:
-    enabled: false
