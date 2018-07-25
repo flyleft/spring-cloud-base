@@ -1,23 +1,37 @@
 package io.choerodon.asgard.saga.demo.consumer;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.choerodon.asgard.saga.demo.producer.AsgardUser;
+import io.choerodon.core.saga.SagaDefinition;
 import io.choerodon.core.saga.SagaTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+
+import java.io.IOException;
 
 @Component
 public class SagaConsumer {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SagaConsumer.class);
 
+    private final ObjectMapper objectMapper = new ObjectMapper();
+
     @SagaTask(code = "devopsCreateUser",
             description = "devops创建用户",
             sagaCode = "asgard-create-user",
-            concurrentExecLimit = 2,
+            concurrentLimitNum = 2,
+            concurrentLimitPolicy = SagaDefinition.ConcurrentLimitPolicy.TYPE,
             seq = 2)
-    public GitLabUser devopsCreateUser(String data) {
-        LOGGER.info("devopsCreateUser {}", data);
-        return null;
+    public DevopsUser devopsCreateUser(String data) throws IOException {
+        LOGGER.info("data {}", data);
+        AsgardUser asgardUser = objectMapper.readValue(data, AsgardUser.class);
+        LOGGER.info("asgardUser {}", asgardUser);
+        DevopsUser devopsUser = new DevopsUser();
+        devopsUser.setId(asgardUser.getId());
+        devopsUser.setGroup("test");
+        LOGGER.info("devopsCreateUser {}", devopsUser);
+        return devopsUser;
     }
 
 
@@ -25,9 +39,11 @@ public class SagaConsumer {
             description = "agile创建用户",
             sagaCode = "asgard-create-user",
             seq = 2)
-    public String agileCreateUser(String data) {
-        LOGGER.info("agileCreateUser {}", data);
-        return "agileCreateUser";
+    public String agileCreateUser(String data) throws IOException {
+        LOGGER.info("data {}", data);
+        AsgardUser asgardUser = objectMapper.readValue(data, AsgardUser.class);
+        LOGGER.info("asgardUser {}", asgardUser);
+        return null;
     }
 
 
@@ -41,7 +57,7 @@ public class SagaConsumer {
 
     }
 
-    public static class GitLabUser {
+    public static class DevopsUser {
         private Long id;
         private String group;
 
