@@ -24,13 +24,12 @@ public class SagaConsumer {
             concurrentLimitPolicy = SagaDefinition.ConcurrentLimitPolicy.TYPE,
             seq = 2)
     public DevopsUser devopsCreateUser(String data) throws IOException {
-        LOGGER.info("data {}", data);
         AsgardUser asgardUser = objectMapper.readValue(data, AsgardUser.class);
-        LOGGER.info("asgardUser {}", asgardUser);
+        LOGGER.info("===== asgardUser {}", asgardUser);
         DevopsUser devopsUser = new DevopsUser();
         devopsUser.setId(asgardUser.getId());
         devopsUser.setGroup("test");
-        LOGGER.info("devopsCreateUser {}", devopsUser);
+        LOGGER.info("===== devopsCreateUser {}", devopsUser);
         return devopsUser;
     }
 
@@ -40,9 +39,8 @@ public class SagaConsumer {
             sagaCode = "asgard-create-user",
             seq = 2)
     public String agileCreateUser(String data) throws IOException {
-        LOGGER.info("data {}", data);
         AsgardUser asgardUser = objectMapper.readValue(data, AsgardUser.class);
-        LOGGER.info("asgardUser {}", asgardUser);
+        LOGGER.info("***** asgardUser {}", asgardUser);
         return null;
     }
 
@@ -51,8 +49,10 @@ public class SagaConsumer {
             description = "gitlab创建用户11",
             sagaCode = "asgard-create-user",
             seq = 5)
-    public String gitlabCreateUser(String data) {
-        LOGGER.info("gitlabCreateUser {}", data);
+    public String gitlabCreateUser(String data) throws IOException {
+        LOGGER.info("##### data {}", data);
+        DevopsUser devopsUser = objectMapper.readValue(data, DevopsUser.class);
+        LOGGER.info("##### devopsUser {}", devopsUser);
         return data;
 
     }
@@ -75,6 +75,14 @@ public class SagaConsumer {
 
         public void setGroup(String group) {
             this.group = group;
+        }
+
+        @Override
+        public String toString() {
+            return "DevopsUser{" +
+                    "id=" + id +
+                    ", group='" + group + '\'' +
+                    '}';
         }
     }
 

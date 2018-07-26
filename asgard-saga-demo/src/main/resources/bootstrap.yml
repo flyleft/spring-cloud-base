@@ -29,11 +29,6 @@ mybatis:
   mapperLocations: classpath*:/mapper/*.xml
   configuration: # 数据库下划线转驼峰配置
     mapUnderscoreToCamelCase: true
-choerodon:
-  saga:
-    enabled: true
-    poll-interval: 10
-    max-execute-thread: 9
 security:
   basic:
     enabled: false
@@ -43,3 +38,8 @@ logging:
 ribbon:
   ReadTimeout: 5000
   ConnectTimeout: 5000
+choerodon:
+  asgard:
+    enabled: true # 是否启动
+    poll-interval: 2 # 拉取间隔(秒)，默认1秒
+    max-execute-thread: 9 # 最大执行线程数
