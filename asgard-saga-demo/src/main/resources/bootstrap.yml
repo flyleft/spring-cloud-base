@@ -39,7 +39,8 @@ ribbon:
   ReadTimeout: 5000
   ConnectTimeout: 5000
 choerodon:
-  asgard:
-    enabled: true # 是否启动
-    poll-interval: 2 # 拉取间隔(秒)，默认1秒
-    max-execute-thread: 9 # 最大执行线程数
+  saga:
+    consumer:
+      thread-num: 5
+      poll-interval: 3
+      enabled: false

@@ -6,7 +6,6 @@ import io.choerodon.asgard.saga.SagaClient;
 import io.choerodon.asgard.saga.demo.producer.mapper.AsgardUserMapper;
 import io.choerodon.asgard.saga.dto.StartInstanceDTO;
 import io.choerodon.core.exception.CommonException;
-import io.choerodon.core.oauth.DetailsHelper;
 import io.choerodon.core.saga.Saga;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;

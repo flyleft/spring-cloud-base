@@ -54,7 +54,12 @@ public class SagaConsumer {
         DevopsUser devopsUser = objectMapper.readValue(data, DevopsUser.class);
         LOGGER.info("##### devopsUser {}", devopsUser);
         return data;
+    }
 
+    @SagaTask(code = "test", sagaCode = "iam-create-project", seq = 1)
+    public String iamCreateUser(String data) {
+        LOGGER.info("&&&&& data {}", data);
+        return data;
     }
 
     public static class DevopsUser {
