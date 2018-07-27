@@ -1,6 +1,6 @@
 # saga使用教程
 
-## pom添加依赖(版本: 6.0.0.RELEASE)
+## pom添加依赖(版本: 0.6.0.RELEASE)
 
 ```xml
 <dependencies>
@@ -52,7 +52,7 @@ concurrentLimitPolicy: 并发策略，默认为NONE。TYPE根据sagaClient.start
 一个服务将@SagaTask注解删除，asgard服务也会同步删除该SagaTask。
 ```
 
-3. 自动扫描。服务添加了choerodon-starter-swagger的6.0.0版本，将自动扫描服务的@Saga和@SagaTask注解
+3. 自动扫描。服务添加了choerodon-starter-swagger的0.6.0版本，将自动扫描服务的@Saga和@SagaTask注解
 
 ## producer端
 1. 注入一个SagaClient，通过feign调用saga。
