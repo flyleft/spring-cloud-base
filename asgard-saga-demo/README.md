@@ -22,7 +22,7 @@
  </dependencies>
 ```
 
-## @Saga和@SagaTask的定义。
+## @Saga和@SagaTask的定义(请确保注解所在类可以被spring扫描到)
 
 1. @Saga
 ```
