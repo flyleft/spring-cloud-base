@@ -41,6 +41,8 @@ ribbon:
 choerodon:
   saga:
     consumer:
-      thread-num: 5
-      poll-interval: 3
-      enabled: false
+      thread-num: 5 # saga消息消费线程池大小
+      poll-interval: 1 # 拉取消息的间隔(秒)，默认1秒
+      max-poll-size: 200 # 每次拉取消息最大数量
+      enabled: true # 启动消费端
+

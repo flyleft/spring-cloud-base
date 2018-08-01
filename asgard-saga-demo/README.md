@@ -76,10 +76,7 @@ concurrentLimitPolicy: 并发策略，默认为NONE。TYPE根据sagaClient.start
  @Transactional
     public AsgardUser createUser(@Valid @RequestBody AsgardUser user) {
          // 业务代码
-         sagaClient.startSaga("asgard-create-user", new StartInstanceDTO(input, 
-                    DetailsHelper.getUserDetails().getUserId(), "", ""));
-         //sagaClient.startSaga("asgard-create-user", new StartInstanceDTO(input, 
-         //                   DetailsHelper.getUserDetails().getUserId()));
+         sagaClient.startSaga("asgard-create-user", new StartInstanceDTO(input, "", ""));
     }
 ```
 
@@ -90,7 +87,8 @@ choerodon:
     consumer:
       thread-num: 5  # 消费线程数
       poll-interval: 3 # 拉取消息的间隔(秒)，默认1秒
-      enabled: false # 是否启用消费端
+      max-poll-size: 200 # 每次拉取的最大消息数量
+      enabled: true # 是否启用消费端
 ```
 
 ```

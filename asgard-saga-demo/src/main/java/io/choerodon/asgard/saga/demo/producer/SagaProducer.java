@@ -24,7 +24,8 @@ public class SagaProducer {
 
     private ObjectMapper objectMapper = new ObjectMapper();
 
-    public SagaProducer(SagaClient sagaClient, AsgardUserMapper asgardUserMapper) {
+    public SagaProducer(SagaClient sagaClient,
+                        AsgardUserMapper asgardUserMapper) {
         this.sagaClient = sagaClient;
         this.asgardUserMapper = asgardUserMapper;
     }
@@ -37,8 +38,7 @@ public class SagaProducer {
         }
         try {
             String input = objectMapper.writeValueAsString(asgardUserMapper.selectByPrimaryKey(user.getId()));
-            //userId: DetailsHelper.getUserDetails().getUserId()，从userDetails获取
-            sagaClient.startSaga("asgard-create-user", new StartInstanceDTO(input, 10L, "", ""));
+            sagaClient.startSaga("asgard-create-user", new StartInstanceDTO(input, "", ""));
             return user;
         } catch (JsonProcessingException e) {
             throw new CommonException("error.SagaProducer.createUser");
