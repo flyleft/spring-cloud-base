@@ -1,12 +1,13 @@
 package io.choerodon.asgard.saga.demo.consumer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.choerodon.asgard.saga.SagaDefinition;
+import io.choerodon.asgard.saga.annotation.SagaTask;
 import io.choerodon.asgard.saga.demo.producer.AsgardUser;
-import io.choerodon.core.saga.SagaDefinition;
-import io.choerodon.core.saga.SagaTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Isolation;
 
 import java.io.IOException;
 
@@ -37,6 +38,10 @@ public class SagaConsumer {
     @SagaTask(code = "agileCreateUser",
             description = "agile创建用户",
             sagaCode = "asgard-create-user",
+            outputSchemaClass = AsgardUser.class,
+            transactionIsolation = Isolation.READ_COMMITTED,
+            transactionReadOnly = true,
+            transactionTimeout = 100,
             seq = 2)
     public String agileCreateUser(String data) throws IOException {
         AsgardUser asgardUser = objectMapper.readValue(data, AsgardUser.class);
@@ -48,6 +53,8 @@ public class SagaConsumer {
     @SagaTask(code = "gitlabCreateUser",
             description = "gitlab创建用户11",
             sagaCode = "asgard-create-user",
+            enabledDbRecord = true,
+            outputSchemaClass = DevopsUser.class,
             seq = 5)
     public String gitlabCreateUser(String data) throws IOException {
         LOGGER.info("##### data {}", data);
@@ -56,7 +63,7 @@ public class SagaConsumer {
         return data;
     }
 
-    @SagaTask(code = "test", sagaCode = "iam-create-project", seq = 1)
+    @SagaTask(code = "test", sagaCode = "iam-create-project", seq = 1, outputSchemaClass = AsgardUser.class)
     public String iamCreateUser(String data) {
         LOGGER.info("&&&&& data {}", data);
         return data;

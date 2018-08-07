@@ -20,11 +20,9 @@ spring:
         uri: localhost:8010
         enabled: false
    datasource:
-     url: jdbc:mysql://localhost/asgard-saga-demo?useUnicode=true&characterEncoding=utf-8&useSSL=false
+     url: jdbc:mysql://localhost/saga_demo?useUnicode=true&characterEncoding=utf-8&useSSL=false
      username: root
      password: root
-     initialize: true
-     schema: classpath:import.sql
 mybatis:
   mapperLocations: classpath*:/mapper/*.xml
   configuration: # 数据库下划线转驼峰配置
@@ -42,7 +40,9 @@ choerodon:
   saga:
     consumer:
       thread-num: 5 # saga消息消费线程池大小
-      poll-interval: 1 # 拉取消息的间隔(秒)，默认1秒
       max-poll-size: 200 # 每次拉取消息最大数量
       enabled: true # 启动消费端
+      poll-interval-ms: 1000 # 拉取间隔，默认1000毫秒
+      record-back-check-interval-ms: 180000 # 数据库记录执行更新状态失败间隔。存在@SagaTask的enabledDbRecord为true时生效
+
 

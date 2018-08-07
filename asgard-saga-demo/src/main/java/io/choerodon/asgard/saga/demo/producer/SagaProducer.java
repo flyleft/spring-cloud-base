@@ -2,11 +2,11 @@ package io.choerodon.asgard.saga.demo.producer;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.choerodon.asgard.saga.SagaClient;
+import io.choerodon.asgard.saga.annotation.Saga;
 import io.choerodon.asgard.saga.demo.producer.mapper.AsgardUserMapper;
 import io.choerodon.asgard.saga.dto.StartInstanceDTO;
+import io.choerodon.asgard.saga.feign.SagaClient;
 import io.choerodon.core.exception.CommonException;
-import io.choerodon.core.saga.Saga;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @RestController
-@Saga(code = "asgard-create-user", description = "创建项目", inputSchema = "{}")
+@Saga(code = "asgard-create-user", description = "创建项目", inputSchemaClass = AsgardUser.class)
 public class SagaProducer {
 
     private SagaClient sagaClient;
