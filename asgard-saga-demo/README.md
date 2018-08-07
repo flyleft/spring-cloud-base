@@ -93,7 +93,6 @@ choerodon:
       max-poll-size: 200 # 每次拉取消息最大数量
       enabled: true # 启动消费端
       poll-interval-ms: 1000 # 拉取间隔，默认1000毫秒
-      record-back-check-interval-ms: 180000 # 数据库记录执行更新状态失败间隔。存在@SagaTask的enabledDbRecord为true时生效
 ```
 
 ```
