@@ -118,6 +118,7 @@ public DevopsUser devopsCreateUser(String data) throws IOException {
 同一个Saga下的多个SagaTask的seq相同，则并行执行。这多个SagaTask的输出进行merge后，成为下个SagaTask的输入。
 merge操作的如下：
 1的输出和2的输出合并：
+1的输出结果和2的完全相同，则合并结果为1或者2的输出。
 1的code为code1，输出为{"name":"23"} 2的code为code2，输出为null 合并结果{"name":"23"}
 1的code为code1，输出为{"name":"23"} 2的code为code2，输出为{"name":"23333"} 合并结果{"name":"23333"}
 1的code为code1，输出为{"name":"23"} 2的code为code2，输出为{"age":23} 合并结果{"name":"23333","age":23}
