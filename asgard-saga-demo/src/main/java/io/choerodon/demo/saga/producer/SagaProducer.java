@@ -1,9 +1,9 @@
-package io.choerodon.asgard.saga.demo.producer;
+package io.choerodon.demo.saga.producer;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.choerodon.asgard.saga.annotation.Saga;
-import io.choerodon.asgard.saga.demo.producer.mapper.AsgardUserMapper;
+import io.choerodon.demo.saga.producer.mapper.AsgardUserMapper;
 import io.choerodon.asgard.saga.dto.StartInstanceDTO;
 import io.choerodon.asgard.saga.feign.SagaClient;
 import io.choerodon.core.exception.CommonException;

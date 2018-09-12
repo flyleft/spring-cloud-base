@@ -1,9 +1,9 @@
-package io.choerodon.asgard.saga.demo.consumer;
+package io.choerodon.demo.saga.consumer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.choerodon.asgard.saga.SagaDefinition;
 import io.choerodon.asgard.saga.annotation.SagaTask;
-import io.choerodon.asgard.saga.demo.producer.AsgardUser;
+import io.choerodon.demo.saga.producer.AsgardUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;

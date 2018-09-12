@@ -1,4 +1,4 @@
-package io.choerodon.asgard.saga.demo.producer;
+package io.choerodon.demo.saga.producer;
 
 import org.hibernate.validator.constraints.NotEmpty;
 

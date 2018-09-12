@@ -1,4 +1,4 @@
-package io.choerodon.asgard.saga.demo;
+package io.choerodon.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

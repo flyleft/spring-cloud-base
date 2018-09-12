@@ -28,9 +28,9 @@
         <module>mybatis-page</module>
         <module>turbine</module>
         <module>spring-cloud-gateway-demo</module>
-        <module>quartz-shcedule</module>
         <module>saga-demo</module>
         <module>asgard-saga-demo</module>
+        <module>spring-quartz</module>
     </modules>
 
     <parent>
