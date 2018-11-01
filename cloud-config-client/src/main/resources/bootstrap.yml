@@ -15,7 +15,7 @@ spring:
 #      name: config_client
   cloud:
     bus:
-       enabled: true
+       enabled: false
     config:
       failFast: true
       uri: ${SPRING_CLOUD_CONFIG_URI:http://localhost:8010}

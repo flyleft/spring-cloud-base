@@ -16,7 +16,7 @@ spring:
         native:
           search-locations: /Users/jcala/work/code/self/spring-cloud-base/config-profiles
     bus:
-      enabled: true
+      enabled: false
 eureka:
   instance:
     preferIpAddress: true

@@ -7,3 +7,6 @@ eureka:
 spring:
    application:
      name:  eureka-client
+logging:
+  level:
+    com.netflix.discovery: debug

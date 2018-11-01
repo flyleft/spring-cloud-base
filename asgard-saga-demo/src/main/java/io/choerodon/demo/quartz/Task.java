@@ -13,7 +13,8 @@ public class Task {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Task.class);
 
-    @JobTask(maxRetryCount = 2, params = {
+    @JobTask(code = "test",
+            maxRetryCount = 2, params = {
             @JobParam(name = "isInstantly", defaultValue = "true", type = Boolean.class),
             @JobParam(name = "name", defaultValue = "zh"),
             @JobParam(name = "age", type = Integer.class)
