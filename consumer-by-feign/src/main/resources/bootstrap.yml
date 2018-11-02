@@ -9,7 +9,7 @@ eureka:
       defaultZone:    http://127.0.0.1:8000/eureka/
 spring:
    application:
-     name:  consumer-feign-service
+     name:  oauth-server
    datasource:
      url: jdbc:mysql://localhost/hap_event_service?useUnicode=true&characterEncoding=utf-8&useSSL=false
      username: hapcloud
