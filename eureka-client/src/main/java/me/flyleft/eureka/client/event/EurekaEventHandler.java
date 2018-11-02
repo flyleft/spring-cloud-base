@@ -1,4 +1,4 @@
-package me.flyleft.eureka.client.instance;
+package me.flyleft.eureka.client.event;
 
 import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.shared.Applications;
@@ -8,20 +8,20 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-public class EurekaListenerHandler {
+public class EurekaEventHandler {
 
     private final Set<String> serviceInstanceIds = Collections.synchronizedSet(new HashSet<>());
 
-    private static EurekaListenerHandler instance = new EurekaListenerHandler();
+    private static EurekaEventHandler instance = new EurekaEventHandler();
 
-    private EurekaInstanceObservable observable = new EurekaInstanceObservable();
+    private EurekaEventObservable observable = new EurekaEventObservable();
 
     private static final String APPLICATION_PATH = "com.netflix.discovery.shared.Application";
 
-    private EurekaListenerHandler() {
+    private EurekaEventHandler() {
     }
 
-    public static EurekaListenerHandler getInstance() {
+    public static EurekaEventHandler getInstance() {
         return instance;
     }
 
@@ -29,7 +29,7 @@ public class EurekaListenerHandler {
         if (instanceInfo.getStatus() == InstanceInfo.InstanceStatus.UP
                 && !serviceInstanceIds.contains(instanceInfo.getId())) {
             serviceInstanceIds.add(instanceInfo.getId());
-            observable.sendEvent(new CloudInstanceChangePayload(instanceInfo));
+            observable.sendEvent(new EurekaEventPayload(instanceInfo));
         }
     }
 
@@ -37,15 +37,15 @@ public class EurekaListenerHandler {
         if (instanceInfo.getStatus() == InstanceInfo.InstanceStatus.DOWN
                 && serviceInstanceIds.contains(instanceInfo.getId())) {
             serviceInstanceIds.remove(instanceInfo.getId());
-            observable.sendEvent(new CloudInstanceChangePayload(instanceInfo));
+            observable.sendEvent(new EurekaEventPayload(instanceInfo));
         }
     }
 
-    public EurekaInstanceObservable getObservable() {
+    public EurekaEventObservable getObservable() {
         return observable;
     }
 
-    public void start() {
+    public void init() {
         try {
             ClassPool classPool = new ClassPool(true);
             //添加com.netflix.discovery包的扫描路径
@@ -57,19 +57,19 @@ public class EurekaListenerHandler {
             CtMethod addInstanceMethod = ctClass.getDeclaredMethod("addInstance");
             //修改addInstance方法
             addInstanceMethod.setBody("{instancesMap.put($1.getId(), $1);"
-                    + "synchronized (instances) {me.flyleft.eureka.client.instance.EurekaListenerHandler.getInstance().eurekaAddInstance($1);" +
+                    + "synchronized (instances) {me.flyleft.eureka.client.event.EurekaEventHandler.getInstance().eurekaAddInstance($1);" +
                     "instances.remove($1);instances.add($1);isDirty = true;}}");
             //获取removeInstance方法
             CtMethod removeInstanceMethod = ctClass.getDeclaredMethod("removeInstance");
             //修改removeInstance方法
-            removeInstanceMethod.setBody("{me.flyleft.eureka.client.instance.EurekaListenerHandler.getInstance().eurekaRemoveInstance($1);this.removeInstance($1, true);}");
+            removeInstanceMethod.setBody("{me.flyleft.eureka.client.event.EurekaEventHandler.getInstance().eurekaRemoveInstance($1);this.removeInstance($1, true);}");
             //覆盖原有的Application类
             ctClass.toClass();
             //使用类加载器重新加载Application类
             classPool.getClassLoader().loadClass(APPLICATION_PATH);
             Class.forName(APPLICATION_PATH);
         } catch (Exception e) {
-            throw new EurekaEventAddException(e);
+            throw new EurekaEventException(e);
         }
 
     }

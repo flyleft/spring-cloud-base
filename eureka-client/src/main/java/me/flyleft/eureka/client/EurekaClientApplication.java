@@ -1,6 +1,6 @@
 package me.flyleft.eureka.client;
 
-import me.flyleft.eureka.client.instance.EurekaListenerHandler;
+import me.flyleft.eureka.client.event.EurekaEventHandler;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
@@ -21,7 +21,7 @@ public class EurekaClientApplication {
     }
 
     public static void main(String[] args) {
-        EurekaListenerHandler.getInstance().start();
+        EurekaEventHandler.getInstance().init();
         new SpringApplicationBuilder(EurekaClientApplication.class).web(true).run(args);
     }
 

@@ -20,7 +20,7 @@ spring:
             zkNodes: 127.0.0.1:2181
         bindings:
           input:
-            destination: eureka-instance
+            destination: eureka-event
             default-binder: kafka
       bus:
         enabled: true

@@ -1,15 +1,18 @@
-package me.flyleft.eureka.client.instance;
+package me.flyleft.eureka.client.event;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.netflix.appinfo.InstanceInfo;
 
 import java.util.Date;
+import java.util.Objects;
 
-public class CloudInstanceChangePayload {
+public class EurekaEventPayload {
 
     private static final String VERSION_STR = "VERSION";
 
     private static final String DEFAULT_VERSION_NAME = "unknown";
+
+    private String id;
 
     private String status;
 
@@ -24,7 +27,8 @@ public class CloudInstanceChangePayload {
 
     private String apiData;
 
-    public CloudInstanceChangePayload(InstanceInfo instanceInfo) {
+    public EurekaEventPayload(InstanceInfo instanceInfo) {
+        this.id = instanceInfo.getId();
         this.status = instanceInfo.getStatus().name();
         this.appName = instanceInfo.getAppName().toLowerCase();
         this.version = instanceInfo.getMetadata().get(VERSION_STR);
@@ -33,7 +37,7 @@ public class CloudInstanceChangePayload {
         this.createTime = new Date();
     }
 
-    public CloudInstanceChangePayload() {
+    public EurekaEventPayload() {
     }
 
     public String getStatus() {
@@ -84,10 +88,32 @@ public class CloudInstanceChangePayload {
         this.apiData = apiData;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        EurekaEventPayload that = (EurekaEventPayload) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
     @Override
     public String toString() {
-        return "CloudInstanceChangePayload{" +
-                "status='" + status + '\'' +
+        return "EurekaEventPayload{" +
+                "id='" + id + '\'' +
+                ", status='" + status + '\'' +
                 ", appName='" + appName + '\'' +
                 ", version='" + version + '\'' +
                 ", instanceAddress='" + instanceAddress + '\'' +

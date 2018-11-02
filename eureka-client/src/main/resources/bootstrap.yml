@@ -9,4 +9,5 @@ spring:
      name:  eureka-client
 logging:
   level:
-    com.netflix.discovery: debug
+    com.netflix.discovery: info
+    me.flyleft.eureka.client.event.AbstractEurekaEventObserver: info
