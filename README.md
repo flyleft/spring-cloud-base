@@ -1,5 +1,7 @@
 - eureka-register-server: eureka注册服务
-- eureka-client: 最简单的eureka服务客户端
+- eureka-register-server-event: eureka注册服务, 监听服务上、下线，发送消息到kafka
+- eureka-client： eureka客户端，使用javassist修改字节码实现监听服务上、下线
+- eureka-client: eureka服务客户端
 - zuul-server: zuul网关
 - zuul-websocket-server: 简单实现websocket代理的zuul网关
 - cloud-config-server: 配置服务器
