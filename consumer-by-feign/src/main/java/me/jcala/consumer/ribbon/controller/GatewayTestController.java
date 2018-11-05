@@ -1,10 +1,11 @@
 package me.jcala.consumer.ribbon.controller;
 
-import com.netflix.client.ClientException;
 import me.jcala.consumer.ribbon.TestClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,15 +25,9 @@ public class GatewayTestController {
         this.testClient = testClient;
     }
 
-    @GetMapping("/test")
-    public String test() {
-        try {
-            logger.info("=== {}", System.currentTimeMillis());
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return "test";
+    @GetMapping("/oauth/api/user")
+    public ResponseEntity<String> test() {
+        return new ResponseEntity<>("{\"error\": \"invalid_token\",\"error_description\": \"Invalid access token: f82898a8-b515-4aeb-a564-36aa9c92c443\"}", HttpStatus.UNAUTHORIZED);
     }
 
     @GetMapping("/hello")

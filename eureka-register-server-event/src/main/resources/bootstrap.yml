@@ -1,0 +1,9 @@
+server:
+  port: 8000
+spring:
+  application:
+    name: eureka-server-event
+management:
+  port: 8001
+  security:
+    enabled: false

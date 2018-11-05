@@ -25,6 +25,7 @@
         <module>spring-cloud-gateway-demo</module>
         <module>asgard-saga-demo</module>
         <module>spring-quartz</module>
+        <module>eureka-register-server-event</module>
     </modules>
 
     <parent>
