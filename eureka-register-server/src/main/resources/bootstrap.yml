@@ -16,7 +16,7 @@ spring:
     username: hapcloud
     password: handhand
   application:
-    name: eureka-register-server
+    name: register-server
   rabbitmq:
     host: localhost
     port: 5672

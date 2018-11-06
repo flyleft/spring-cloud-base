@@ -6,8 +6,8 @@ eureka:
       defaultZone:    http://127.0.0.1:8000/eureka/
 spring:
    application:
-     name:  eureka-client
+     name: asgard-test-service
 logging:
   level:
-    com.netflix.discovery: info
+    com.netflix.discovery: debug
     me.flyleft.eureka.client.event.AbstractEurekaEventObserver: info
