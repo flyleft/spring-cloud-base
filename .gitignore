@@ -18,7 +18,7 @@ target/
 *.cache
 *.diff
 *.patch
-*.tmp
+*.tmp/
 /temp
 /tmp
 app.jar
