@@ -53,7 +53,6 @@ public class SagaConsumer {
     @SagaTask(code = "gitlabCreateUser",
             description = "gitlab创建用户11",
             sagaCode = "asgard-create-user",
-            enabledDbRecord = true,
             outputSchemaClass = DevopsUser.class,
             seq = 5)
     public String gitlabCreateUser(String data) throws IOException {

@@ -1,8 +1,8 @@
 server:
   port: 8010
 spring:
-  profiles:
-    active: native
+#  profiles:
+#    active: native
   application:
     name: cloud-config-server
   cloud:
@@ -12,9 +12,9 @@ spring:
           uri: https://github.com/jcalaz/spring-cloud-base.git
           searchPaths: config-profiles
           default-label: master
+          force-pull: true
+          basedir: /Users/jcalaz/work/code/self/spring-cloud-base/temp/config-profiles
         bootstrap: true
-        native:
-          search-locations: /Users/jcala/work/code/self/spring-cloud-base/config-profiles
     bus:
       enabled: false
 eureka:

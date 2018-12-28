@@ -1,6 +1,7 @@
 package io.choerodon.demo.saga.producer;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;

@@ -3,10 +3,11 @@ package io.choerodon.demo.saga.producer;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.choerodon.asgard.saga.annotation.Saga;
-import io.choerodon.demo.saga.producer.mapper.AsgardUserMapper;
 import io.choerodon.asgard.saga.dto.StartInstanceDTO;
 import io.choerodon.asgard.saga.feign.SagaClient;
+import io.choerodon.asgard.saga.producer.SagaTransactionalProducer;
 import io.choerodon.core.exception.CommonException;
+import io.choerodon.demo.saga.producer.mapper.AsgardUserMapper;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,12 +23,17 @@ public class SagaProducer {
 
     private AsgardUserMapper asgardUserMapper;
 
+    private SagaTransactionalProducer producer;
+
+
     private ObjectMapper objectMapper = new ObjectMapper();
 
     public SagaProducer(SagaClient sagaClient,
-                        AsgardUserMapper asgardUserMapper) {
+                        AsgardUserMapper asgardUserMapper,
+                        SagaTransactionalProducer producer) {
         this.sagaClient = sagaClient;
         this.asgardUserMapper = asgardUserMapper;
+        this.producer = producer;
     }
 
     @PostMapping("/v1/users")
@@ -43,6 +49,13 @@ public class SagaProducer {
         } catch (JsonProcessingException e) {
             throw new CommonException("error.SagaProducer.createUser");
         }
+    }
+
+
+    @PostMapping("/v1/users/by_template")
+    @Transactional
+    public AsgardUser createUserByTemplate(@Valid @RequestBody AsgardUser user) {
+
     }
 
 }
