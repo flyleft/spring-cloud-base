@@ -29,7 +29,7 @@ choerodon:
     consumer:
       max-poll-size: 200 # 每次拉取消息最大数量
       enabled: true # 启动消费端
-      poll-interval-ms: 10000 # 拉取间隔，默认1000毫秒
+      poll-interval-ms: 1000 # 拉取间隔，默认1000毫秒
       core-thread-num: 5
       max-thread-num: 50
     producer:
@@ -37,7 +37,7 @@ choerodon:
   schedule:
     consumer:
       enabled: false # 启用任务调度消费端
-      poll-interval-ms: 10000 # 拉取间隔，默认1000毫秒
+      poll-interval-ms: 1000 # 拉取间隔，默认1000毫秒
       core-thread-num: 2
       max-thread-num: 5
 logging:
