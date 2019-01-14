@@ -43,9 +43,6 @@ public class SagaConsumer {
             seq = 2)
     public String agileCreateUser(String data) throws IOException {
         AsgardUser asgardUser = objectMapper.readValue(data, AsgardUser.class);
-        if (true) {
-            throw new RuntimeException("lve");
-        }
         LOGGER.info("2222222222 userDetails {}", DetailsHelper.getUserDetails());
         return null;
     }
