@@ -29,7 +29,7 @@ public class SagaProducer {
 
     private AsgardUserMapper asgardUserMapper;
 
-    private TransactionalProducer producer;
+    private TransactionalProducer transactionalProducer;
 
     private ObjectMapper objectMapper = new ObjectMapper();
 
@@ -38,11 +38,10 @@ public class SagaProducer {
                         TransactionalProducer producer) {
         this.sagaClient = sagaClient;
         this.asgardUserMapper = asgardUserMapper;
-        this.producer = producer;
+        this.transactionalProducer = producer;
     }
 
     @PostMapping("/v1/users/old")
-    @Saga(code = SAGA_CREATE_USER, description = "创建项目", inputSchemaClass = AsgardUser.class)
     @Transactional
     public AsgardUser createUser(@Valid @RequestBody AsgardUser user) {
         if (asgardUserMapper.insertSelective(user) != 1) {
@@ -59,13 +58,14 @@ public class SagaProducer {
 
 
     @PostMapping("/v1/projects/{project_id}/users/new")
+    @Saga(code = SAGA_CREATE_USER, description = "创建项目", inputSchemaClass = AsgardUser.class)
     public AsgardUser projectLevelCreateUser(@PathVariable("project_id") long projectId,
                                              @Valid @RequestBody AsgardUser user) {
         //通过StartSagaBuilder.newBuilder()设置saga的参数
         //level和sourceId：表示所在层级和资源id，此处即为项目层和项目id
         //RefId和RefType表示关联的类型和关联的id，用于并发策略限制
         //
-        return producer.applyAndReturn(StartSagaBuilder.newBuilder().withLevel(ResourceLevel.PROJECT)
+        return transactionalProducer.applyAndReturn(StartSagaBuilder.newBuilder().withLevel(ResourceLevel.PROJECT)
                         .withSourceId(projectId)
                         .withRefType("user")
                         .withPayloadAndSerialize(user)
@@ -84,7 +84,7 @@ public class SagaProducer {
 
     @PostMapping("/v1/users/new")
     public AsgardUser siteLevelCreateUser(@Valid @RequestBody AsgardUser user) {
-        producer.apply(StartSagaBuilder.newBuilder().withLevel(ResourceLevel.SITE).withSagaCode(SAGA_CREATE_USER),
+        transactionalProducer.apply(StartSagaBuilder.newBuilder().withLevel(ResourceLevel.SITE).withSagaCode(SAGA_CREATE_USER),
                 builder -> {
                     if (asgardUserMapper.insertSelective(user) != 1) {
                         throw new CommonException(CREATE_USER_ERROR);

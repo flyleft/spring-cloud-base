@@ -20,7 +20,6 @@ public class SagaConsumer {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @SagaTask(code = "devopsCreateUser",
-            description = "devops创建用户",
             sagaCode = "asgard-create-user",
             concurrentLimitNum = 2,
             concurrentLimitPolicy = SagaDefinition.ConcurrentLimitPolicy.TYPE,
@@ -30,6 +29,7 @@ public class SagaConsumer {
         DevopsUser devopsUser = new DevopsUser();
         devopsUser.setId(asgardUser.getId());
         devopsUser.setGroup("test");
+        //数据库插入插入devopsUser
         LOGGER.info("11111111 userDetails {}", DetailsHelper.getUserDetails());
         return devopsUser;
     }
@@ -43,7 +43,8 @@ public class SagaConsumer {
             seq = 2)
     public String agileCreateUser(String data) throws IOException {
         AsgardUser asgardUser = objectMapper.readValue(data, AsgardUser.class);
-        LOGGER.info("2222222222 userDetails {}", DetailsHelper.getUserDetails());
+        LOGGER.info("2222222222 userDetails {}，asgardUser：{}", DetailsHelper.getUserDetails(), asgardUser);
+        //业务操作
         return null;
     }
 

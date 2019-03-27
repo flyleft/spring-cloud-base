@@ -24,14 +24,16 @@ security:
 ribbon:
   ReadTimeout: 5000
   ConnectTimeout: 5000
+
+
 choerodon:
   saga:
     consumer:
       max-poll-size: 200 # 每次拉取消息最大数量
       enabled: true # 启动消费端
       poll-interval-ms: 1000 # 拉取间隔，默认1000毫秒
-      core-thread-num: 5
-      max-thread-num: 50
+      core-thread-num: 5 # 线程池的核心数目
+      max-thread-num: 20 # 线程池的最大数目
     producer:
       consistency-type: db # 持久化类型
   schedule:
